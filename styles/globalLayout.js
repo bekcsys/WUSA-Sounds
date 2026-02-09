@@ -5,14 +5,16 @@ export const layoutConstants = {
   cardBorderRadius: 20,
   cardPadding: 24,
   cardPaddingMobile: 16,
-  safeAreaBackground: "#000000",
+  safeAreaBackground: "#ffffff",
   cardBackground: "#ffffff",
 };
 
 export default StyleSheet.create({
-  safeArea: {
+  "safeArea-OuterLayout": {
     flex: 1,
     backgroundColor: layoutConstants.safeAreaBackground,
+    borderWidth: 10,
+    borderColor: "green",
   },
   background: {
     flex: 1,
@@ -22,11 +24,14 @@ export default StyleSheet.create({
   backgroundImageStyle: {
     resizeMode: "cover",
   },
-  container: {
+  innerLayout: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: layoutConstants.containerPadding,
+    padding: 0,
+    backgroundColor: layoutConstants.safeAreaBackground,
+    borderWidth: 4,
+    borderColor: "red",
   },
   cardShadow: {
     shadowColor: "#000000",
@@ -49,7 +54,68 @@ export default StyleSheet.create({
     marginBottom: 20,
     paddingTop: 16,
   },
+  buttonsContainer: {
+    borderRadius: 35,
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    borderWidth: 1,
+    borderColor: "rgba(0, 0, 0, 0.08)",
+    padding: 25,
+    marginTop: 8,
+    overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  tabletLogoSection: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  tabletButtonsSection: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    minHeight: 0,
+    overflow: "hidden",
+    paddingTop: 0,
+  },
+  buttonsContainerTablet: {
+    padding: 30,
+  },
   buttonsGrid: {
     alignItems: "center",
+  },
+  buttonsGridScroll: {
+    width: "100%",
+    position: "relative",
+    overflow: "hidden",
+  },
+  scrollView: {
+    width: "100%",
+    overflow: "hidden",
+  },
+  scrollContent: {
+    alignItems: "center",
+  },
+  scrollContentCentered: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+  contentWrap: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footer: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    alignItems: "center",
+    flexShrink: 0,
+  },
+  footerText: {
+    fontSize: 18,
+    color: "rgba(0, 0, 0, 0.55)",
   },
 });
