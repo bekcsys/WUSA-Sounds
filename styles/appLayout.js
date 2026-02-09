@@ -63,10 +63,7 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
   };
 }
 
-const TABLET_PORTRAIT_BUTTON_SIZE = 115;
-
-export function getTabletPortraitGridStyles(gap) {
-  const displaySize = TABLET_PORTRAIT_BUTTON_SIZE;
+export function getTabletPortraitGridStyles(gap, displaySize) {
   const gridWidth = displaySize * 2 + gap;
   return {
     displaySize,

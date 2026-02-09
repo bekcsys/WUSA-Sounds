@@ -10,12 +10,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Footer() {
+export default function Footer({ isTablet }) {
+  const textStyle = isTablet ? layout.footerText : layout.footerTextMobile;
   return (
     <View>
       <View style={styles.line} />
       <View style={layout.footer}>
-        <Text style={layout.footerText}>
+        <Text style={textStyle}>
           All rights reserved, Wellness USA. © {new Date().getFullYear()}
         </Text>
       </View>

@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { C3bGreyContainer, C3cButtonsL1 } from "./components/C1Root-Top";
-import C1RootTop from "./components/C1Root-Top";
-import C1RootBottomFooter from "./components/C1Root-Bottom-Footer/C1Root-Bottom-Footer";
+import { C3bGreyContainer, C3cButtonsL1 } from "./components/Root-Top";
+import C1RootTop from "./components/Root-Top";
+import C1RootBottomFooter from "./components/xRoot-Footer/C1Root-Bottom-Footer";
 import layout from "./styles/globalLayout";
 import scrollButtons from "./styles/scrollButtons";
 import {
@@ -18,7 +18,6 @@ import {
   getLogoSize,
   getButtonStripStyles,
   getMobileGridStyles,
-  getTabletPortraitGridStyles,
 } from "./styles/appLayout";
 
 const WUSALogo = require("./assets/images/L01-WUSA.png");
@@ -44,7 +43,6 @@ export default function App() {
   const cardLayout = getCardLayout(isTablet, width, height);
   const gridPadding = isTablet ? 24 : 16;
   const gap = isTablet ? 28 : 20;
-  const tabletPortraitGrid = getTabletPortraitGridStyles(gap);
   const { companyLogoHeight, companyLogoWidth, logoMarginBottom } =
     getLogoSize(isTablet);
   const logoAreaHeight = companyLogoHeight + logoMarginBottom;
@@ -65,7 +63,6 @@ export default function App() {
     gap,
     logoAreaHeight,
   );
-
   const scrollRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
   const scrollStep = contentWidth * 0.6;
@@ -85,7 +82,14 @@ export default function App() {
     <SafeAreaView style={layout["safeArea-OuterLayout"]}>
       <StatusBar barStyle="dark-content" />
       <View style={layout.innerLayout}>
-        <View style={{ flex: 1, width: "100%", alignSelf: "stretch" }}>
+        <View
+          style={{
+            flex: 1,
+            width: "100%",
+            alignSelf: "stretch",
+            marginBottom: 10,
+          }}
+        >
           <C1RootTop
           logoSource={WUSALogo}
           logoWidth={companyLogoWidth}
@@ -94,27 +98,11 @@ export default function App() {
           isTablet={isTablet}
         >
           {isTabletPortrait ? (
-            <View style={layout.tabletButtonsSection}>
-              <C3bGreyContainer
-                style={[
-                  layout.buttonsContainerTablet,
-                  { flex: 1, alignSelf: "stretch" },
-                ]}
-              >
-                <View style={[layout.buttonsGrid, tabletPortraitGrid.gridStyle]}>
-                  {OPTIONS.map((opt) => (
-                    <C3cButtonsL1
-                      key={opt.id}
-                      logo={opt.logo}
-                      label={opt.label}
-                      onPress={() => {}}
-                      size={tabletPortraitGrid.displaySize}
-                      containerStyle={tabletPortraitGrid.cellStyle}
-                    />
-                  ))}
-                </View>
-              </C3bGreyContainer>
-            </View>
+            <C3bGreyContainer
+              isTabletPortrait
+              options={OPTIONS}
+              onPress={() => {}}
+            />
           ) : isTablet ? (
             <View style={layout.tabletButtonsSection}>
               <C3bGreyContainer
@@ -192,7 +180,7 @@ export default function App() {
           </C1RootTop>
         </View>
       </View>
-      <C1RootBottomFooter />
+      <C1RootBottomFooter isTablet={isTablet} />
     </SafeAreaView>
   );
 }

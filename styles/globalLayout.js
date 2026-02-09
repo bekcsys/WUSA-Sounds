@@ -13,7 +13,7 @@ export default StyleSheet.create({
   "safeArea-OuterLayout": {
     flex: 1,
     backgroundColor: layoutConstants.safeAreaBackground,
-    borderWidth: 10,
+    borderWidth: 0,
     borderColor: "green",
   },
   background: {
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: 0,
     backgroundColor: layoutConstants.safeAreaBackground,
-    borderWidth: 4,
+    borderWidth: 0,
     borderColor: "red",
   },
   cardShadow: {
@@ -56,9 +56,9 @@ export default StyleSheet.create({
   },
   buttonsContainer: {
     borderRadius: 35,
-    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    backgroundColor: "rgba(0, 0, 0, 0.02)",
     borderWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.08)",
+    borderColor: "rgba(0, 0, 0, 0.06)",
     padding: 25,
     marginTop: 8,
     overflow: "hidden",
@@ -85,6 +85,8 @@ export default StyleSheet.create({
   },
   buttonsGrid: {
     alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
   },
   buttonsGridScroll: {
     width: "100%",
@@ -116,6 +118,10 @@ export default StyleSheet.create({
   },
   footerText: {
     fontSize: 18,
+    color: "rgba(0, 0, 0, 0.55)",
+  },
+  footerTextMobile: {
+    fontSize: 14,
     color: "rgba(0, 0, 0, 0.55)",
   },
 });

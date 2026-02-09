@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     width: "100%",
     minHeight: 0,
     overflow: "hidden",
-    borderWidth: 5,
+    borderWidth: 0,
     borderColor: "blue",
   },
   inner: {

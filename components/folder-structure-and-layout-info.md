@@ -4,26 +4,34 @@
 
 ```
 components/
-  C1Root-Top/
+  Root-Top/
     C1Root-Top.js           # Root: logo area + button area
     index.js
-    C2LogoContainer/
-      C2-LogoContainer.js   # Logo section wrapper
-      C2b-Logo.js           # Logo image (with optional border)
-    C3ButtonContainer/
-      C3-ButtonContainer.js # Button area wrapper (centers grey container)
-      C3b-greyContainer.js  # Grey rounded box; contains buttons
-      C3c-buttonsL1.js      # Single menu button (logo + label)
-  C1Root-Bottom-Footer/
+    WelcomeScreen/
+      C2LogoContainer/
+        C2-LogoContainer.js # Logo section wrapper
+        C2b-Logo.js         # Logo image (with optional border)
+      C3ButtonContainer/
+        C3-ButtonContainer.js # Button area wrapper (centers grey container)
+        C3b-greyContainer.js  # Grey rounded box; contains buttons
+        C3c-buttonsL1.js      # Single menu button (logo + label)
+  xRoot-Footer/
     C1Root-Bottom-Footer.js # Footer wrapper
     Footer.js               # Footer text
   MenuButtonContainer.js    # Standalone; uses layout.buttonsContainer
 ```
 
+## Global layout wrappers (styles/globalLayout.js)
+
+Applied at the root in App.js; not components but layout styles:
+
+- **safeArea-OuterLayout**: Style on `SafeAreaView`. Outermost wrapper (full screen safe area).
+- **innerLayout**: Style on the main content `View` directly inside it. Wraps the flex column that holds C1RootTop and C1RootBottomFooter. Zero padding; content fills it. All component trees (Root-Top, xRoot-Footer) sit inside this View.
+
 ## Layout hierarchy (App.js)
 
 - **Outer**: `SafeAreaView` (safeArea-OuterLayout) > `View` (innerLayout).
-- **Main content**: Flex container with:
+- **Main content** (inside innerLayout): Flex container with:
   - **Top**: `C1RootTop` (fills remaining height).
   - **Bottom**: `C1RootBottomFooter` (below, no flex grow).
 
@@ -43,17 +51,17 @@ Inside `C3ButtonContainer`:
 | Level | Role | Examples |
 |-------|------|----------|
 | Root (App) | Screen layout: top block + footer | C1RootTop, C1RootBottomFooter |
-| C1Root-Top | Top block: logo + buttons | C1Root-Top.js |
+| Root-Top | Top block: logo + buttons | C1Root-Top.js |
 | Section | One vertical region | C2LogoContainer, C3ButtonContainer |
-| Container | Wrapper (centering, clipping) | C3-ButtonContainer, C3b-greyContainer, C1Root-Bottom-Footer |
+| Container | Wrapper (centering, clipping) | C3-ButtonContainer, C3b-greyContainer, xRoot-Footer |
 | Leaf | UI piece (image, button, text) | C2b-Logo, C3c-buttonsL1, Footer |
 
 ## Exports
 
-- **C1Root-Top/index.js**: Default `C1RootTop`; named `C3ButtonContainer`, `C3bGreyContainer`, `C3cButtonsL1`.
-- **C1Root-Bottom-Footer**: No index; App imports `C1Root-Bottom-Footer/C1Root-Bottom-Footer.js` for `C1RootBottomFooter`.
+- **Root-Top/index.js**: Default `C1RootTop`; named `C3ButtonContainer`, `C3bGreyContainer`, `C3cButtonsL1`.
+- **xRoot-Footer**: No index; App imports `xRoot-Footer/C1Root-Bottom-Footer.js` for `C1RootBottomFooter`.
 
 ## Naming
 
-- **C1**: Top block (welcome). **C2**: Logo. **C3**: Buttons (C3b = grey box, C3c = button row). **C1Root-Bottom**: Footer.
+- **Root-Top**: Top block (logo + buttons). **xRoot-Footer**: Footer block. **C2**: Logo. **C3**: Buttons (C3b = grey box, C3c = button row).
 - Files use kebab-case where needed (e.g. `C1Root-Top.js`, `C3c-buttonsL1.js`); component names are PascalCase (e.g. `C1RootTop`, `C3cButtonsL1`).

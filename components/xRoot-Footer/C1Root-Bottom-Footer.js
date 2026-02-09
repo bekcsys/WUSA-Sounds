@@ -2,10 +2,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Footer from "./Footer";
 
-export default function C1RootBottomFooter() {
+export default function C1RootBottomFooter({ isTablet }) {
   return (
     <View style={styles.root}>
-      <Footer />
+      <Footer isTablet={isTablet} />
     </View>
   );
 }
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 0,
     overflow: "hidden",
-    borderWidth: 5,
-    borderColor: "blue",
+    borderWidth: 0,
+    borderColor: "red",
   },
 });

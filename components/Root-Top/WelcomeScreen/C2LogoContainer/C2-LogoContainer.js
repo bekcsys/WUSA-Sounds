@@ -1,11 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import layout from "../../../styles/globalLayout";
+import layout from "../../../../styles/globalLayout";
 import C2bLogo from "./C2b-Logo";
 
 const styles = StyleSheet.create({
   debug: {
-    borderWidth: 5,
+    borderWidth: 0,
     borderColor: "blue",
     width: "100%",
   },

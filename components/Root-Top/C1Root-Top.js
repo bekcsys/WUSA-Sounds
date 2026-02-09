@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import C2LogoContainer from "./C2LogoContainer/C2-LogoContainer";
-import C3ButtonContainer from "./C3ButtonContainer/C3-ButtonContainer";
+import C2LogoContainer from "./WelcomeScreen/C2LogoContainer/C2-LogoContainer";
+import C3ButtonContainer from "./WelcomeScreen/C3ButtonContainer/C3-ButtonContainer";
 
 export default function C1RootTop({
   logoSource,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     padding: 0,
     minHeight: 0,
     overflow: "hidden",
-    borderWidth: 10,
+    borderWidth: 0,
     borderColor: "orange",
   },
   topHalf: {

@@ -5,8 +5,8 @@ const BORDER_WIDTH = 3;
 
 const styles = StyleSheet.create({
   wrapper: {
-    borderWidth: BORDER_WIDTH,
-    borderColor: "black",
+    borderWidth: 3,
+    borderColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
   },

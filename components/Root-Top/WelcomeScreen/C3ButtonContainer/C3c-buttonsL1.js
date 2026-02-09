@@ -26,6 +26,11 @@ const buttonsL1Styles = StyleSheet.create({
   cell: {
     alignItems: "center",
     justifyContent: "flex-start",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 3,
   },
   inner: {
     justifyContent: "center",
