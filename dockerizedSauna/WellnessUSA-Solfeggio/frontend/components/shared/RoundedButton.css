@@ -1,0 +1,104 @@
+/* Shared Rounded Button - Reusable and customizable */
+
+.roundedButton {
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+/* Size variants */
+.roundedButton.sizeSmall {
+  width: clamp(120px, 15vw, 160px);
+  height: clamp(120px, 15vw, 160px);
+  font-size: clamp(18px, 3vw, 26px);
+}
+
+.roundedButton.sizeMedium {
+  width: clamp(120px, 20vw, 180px);
+  height: clamp(120px, 20vw, 180px);
+  font-size: clamp(24px, 4vw, 32px);
+}
+
+.roundedButton.sizeLarge {
+  width: clamp(140px, 22vw, 200px);
+  height: clamp(140px, 22vw, 200px);
+  font-size: clamp(32px, 5vw, 48px);
+}
+
+/* Border variants */
+.roundedButton.borderNordicBlue {
+  border: 10px solid var(--color-nordic-blue);
+}
+
+.roundedButton.borderSlateBlue {
+  border: 10px solid var(--color-slate-blue);
+}
+
+.roundedButton.borderCardinalRed {
+  border: 10px solid var(--color-cardinal-red);
+}
+
+/* Background variants */
+.roundedButton.bgGradientBlue {
+  background: #ffffff;
+}
+
+.roundedButton.bgGradientBlue:hover {
+  background: #f5f5f5;
+}
+
+.roundedButton.bgGradientBlueHover {
+  background: #f5f5f5;
+}
+
+.roundedButton.bgWhite {
+  background: #ffffff;
+}
+
+.roundedButton.bgWhite:hover {
+  background: #f5f5f5;
+}
+
+/* Glow effects on hover */
+.roundedButton.glowNordicBlue:hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 30px var(--shadow-nordic-blue-80), 0 0 60px var(--shadow-nordic-blue-50);
+}
+
+.roundedButton.glowSlateBlue:hover {
+  box-shadow: 0 0 30px var(--shadow-slate-blue-80), 0 0 60px var(--shadow-slate-blue-50), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.roundedButton.glowCardinalRed:hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 30px var(--shadow-cardinal-red-80), 0 0 60px var(--shadow-cardinal-red-50);
+}
+
+/* Hover transform */
+.roundedButton:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+/* Text styling */
+.roundedButton {
+  font-weight: 700;
+  font-family: var(--font-primary, 'Karla', sans-serif);
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Image inside button */
+.roundedButton img {
+  width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 0;
+}

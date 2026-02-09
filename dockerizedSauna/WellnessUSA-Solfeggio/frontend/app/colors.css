@@ -1,0 +1,35 @@
+/* Branded Colors - WellnessUSA */
+
+:root {
+  /* Branded Color Palette */
+  --color-himmel-blue: rgb(0, 169, 223);
+  --color-nordic-blue: rgb(1, 51, 73);
+  --color-slate-blue: rgb(6, 79, 114);
+  --color-cardinal-red: rgb(206, 25, 60);
+  --color-steel-grey: rgb(208, 25, 60);
+  --color-visible-gray: rgb(126, 128, 129);
+
+  /* Transparent variants for backgrounds */
+  --color-cardinal-red-transparent: rgba(206, 25, 60, 0.6);
+  --color-cardinal-red-transparent-light: rgba(206, 25, 60, 0.4);
+  --color-cardinal-red-transparent-dark: rgba(206, 25, 60, 0.8);
+  
+  /* Nordic Blue transparent variants */
+  --color-nordic-blue-transparent: rgba(1, 51, 73, 0.8);
+  --color-nordic-blue-transparent-light: rgba(1, 51, 73, 0.5);
+  --color-nordic-blue-transparent-dark: rgba(1, 51, 73, 0.9);
+  
+  /* Slate Blue transparent variants */
+  --color-slate-blue-transparent: rgba(6, 79, 114, 0.8);
+  --color-slate-blue-transparent-light: rgba(6, 79, 114, 0.5);
+  
+  /* Shadow variants using branded colors */
+  --shadow-cardinal-red-40: rgba(206, 25, 60, 0.4);
+  --shadow-cardinal-red-50: rgba(206, 25, 60, 0.5);
+  --shadow-cardinal-red-60: rgba(206, 25, 60, 0.6);
+  --shadow-cardinal-red-80: rgba(206, 25, 60, 0.8);
+  --shadow-nordic-blue-50: rgba(1, 51, 73, 0.5);
+  --shadow-nordic-blue-80: rgba(1, 51, 73, 0.8);
+  --shadow-slate-blue-50: rgba(6, 79, 114, 0.5);
+  --shadow-slate-blue-80: rgba(6, 79, 114, 0.8);
+}

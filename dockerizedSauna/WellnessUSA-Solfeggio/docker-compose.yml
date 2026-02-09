@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: sound-player-backend
+    ports:
+      - "8000:8000"
+    # Audio files are copied into the image during build
+    # Uncomment the volume line below if you want to mount external audio files
+    # volumes:
+    #   - ./Audio:/home/admin/Audio:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    # For macOS, we may need to mount PulseAudio socket or use host audio
+    # Uncomment the following if using PulseAudio on the host:
+    # volumes:
+    #   - /run/user/1000/pulse/native:/run/user/1000/pulse/native
+    # For direct audio access on Linux, uncomment:
+    # devices:
+    #   - /dev/snd:/dev/snd
+    networks:
+      - sound-player-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sound-player-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - sound-player-network
+    restart: unless-stopped
+
+networks:
+  sound-player-network:
+    driver: bridge

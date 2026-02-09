@@ -1,0 +1,122 @@
+/* VolumeControl Component Styles */
+
+.volumeControlContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.5vh, 12px);
+  width: 100%;
+  max-width: clamp(280px, 90%, 350px);
+  padding: clamp(10px, 2vh, 15px) clamp(15px, 3vw, 25px);
+  background: var(--volume-bg-color, rgba(60, 60, 70, 0.3));
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid var(--volume-border-color, rgba(200, 200, 200, 0.15));
+  box-shadow: var(--volume-shadow, 0 8px 32px rgba(40, 40, 50, 0.5));
+  position: relative;
+  z-index: 10;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.volumeControlContainer:hover {
+  transform: scale(1.02);
+}
+
+.volumeControlContainer.light {
+  --volume-bg-color: rgba(255, 255, 255, 0.4);
+  --volume-border-color: rgba(0, 0, 0, 0.15);
+  --volume-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.volumeControlContainer.dark {
+  --volume-bg-color: rgba(60, 60, 70, 0.3);
+  --volume-border-color: rgba(200, 200, 200, 0.15);
+  --volume-shadow: 0 8px 32px rgba(40, 40, 50, 0.5);
+}
+
+.volumeControlRow {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 15px);
+  width: 100%;
+}
+
+.volumeIcon {
+  font-size: clamp(24px, 5vw, 32px);
+  filter: var(--volume-icon-filter, drop-shadow(0 2px 4px rgba(40, 40, 50, 0.6)));
+  flex-shrink: 0;
+}
+
+.volumeControlContainer.light .volumeIcon {
+  --volume-icon-filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.volumeControlContainer.dark .volumeIcon {
+  --volume-icon-filter: drop-shadow(0 2px 4px rgba(40, 40, 50, 0.6));
+}
+
+.volumeSlider {
+  flex: 1;
+  height: 10px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 100px;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(100, 200, 255, 1);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.volumeSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(100, 200, 255, 0.6);
+}
+
+.volumeSlider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(100, 200, 255, 1);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.volumeSlider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(100, 200, 255, 0.6);
+}
+
+.volumePercentage {
+  font-size: clamp(14px, 3vw, 18px);
+  font-weight: 600;
+  font-family: var(--font-scandia);
+  color: var(--volume-text-color, #d0d0d0);
+  min-width: clamp(40px, 8vw, 50px);
+  text-align: right;
+  text-shadow: var(--volume-text-shadow, 0 2px 4px rgba(40, 40, 50, 0.8));
+  flex-shrink: 0;
+}
+
+.volumeControlContainer.light .volumePercentage {
+  --volume-text-color: #1a1a2e;
+  --volume-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.volumeControlContainer.dark .volumePercentage {
+  --volume-text-color: #d0d0d0;
+  --volume-text-shadow: 0 2px 4px rgba(40, 40, 50, 0.8);
+}

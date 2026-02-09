@@ -1,0 +1,115 @@
+/* MainMenu Component Styles */
+@import './shared/ContainerCard.css';
+@import './shared/Button.css';
+
+.mainMenuContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: clamp(10px, 2vh, 30px) clamp(15px, 3vw, 40px);
+  box-sizing: border-box;
+}
+
+.contentWrapper {
+  text-align: center;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vh, 40px);
+}
+
+/* Container card styles are now in shared/ContainerCard.css */
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2px, 0.1vh, 1px);
+}
+
+.title {
+  font-size: clamp(36px, 7vw, 56px);
+  font-weight: 900;
+  font-family: var(--font-primary, 'Karla', sans-serif);
+  color: var(--color-nordic-blue) !important;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: block;
+  width: 100%;
+}
+
+.subtitle {
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 400;
+  font-family: var(--font-scandia);
+  color: var(--color-nordic-blue);
+  margin: 0;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.buttonsRow {
+  display: flex;
+  flex-direction: row;
+  gap: clamp(30px, 6vw, 60px);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.menuOptionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(15px, 3vh, 25px);
+}
+
+/* Button styles are now in shared/RoundedButton.css */
+/* Use classes: roundedButton sizeMedium borderSlateBlue bgGradientBlue glowSlateBlue */
+
+/* Image styles are now in shared/RoundedButton.css (.roundedButton img) */
+
+.labelContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vh, 8px);
+}
+
+.menuLabel {
+  font-size: clamp(18px, 3.5vw, 26px);
+  font-weight: 700;
+  font-family: var(--font-scandia);
+  letter-spacing: 1px;
+  color: var(--color-cardinal-red);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.menuDescription {
+  font-size: clamp(12px, 2vw, 16px);
+  font-weight: 400;
+  font-family: var(--font-scandia);
+  color: var(--color-nordic-blue);
+  text-align: center;
+  opacity: 0.9;
+}
+

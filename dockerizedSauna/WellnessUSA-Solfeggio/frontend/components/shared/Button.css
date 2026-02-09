@@ -1,0 +1,88 @@
+/* Beautiful Reusable Button Component - Rounded corners, borders, and glow on hover */
+
+.sharedButton {
+  border-radius: 50px;
+  cursor: pointer;
+  border: 5px solid var(--color-nordic-blue);
+  /* Typography */
+  font-family: var(--font-scandia);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* Standardized sizing */
+  padding: 10px 32px;
+  /* Smooth transitions */
+  transition: all 0.3s ease;
+}
+
+.sharedButton:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive sizing */
+@media (min-width: 640px) {
+  .sharedButton {
+    padding: 12px 38px;
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 768px) {
+  .sharedButton {
+    padding: 12px 40px;
+    font-size: 18px;
+  }
+}
+
+/* --- 10.1" tablet optimization (1920×1200) --- */
+@media (min-width: 1200px) and (max-width: 1920px) and (max-height: 1200px) {
+  .sharedButton {
+    padding: 14px 44px;
+    font-size: 20px;
+  }
+}
+
+/* Start button customization - green fill with transparency */
+.startButton {
+  background: rgba(34, 197, 94, 0.85);
+}
+
+/* Back button customization - cardinal red with transparency */
+.backButton {
+  background: rgba(206, 25, 60, 0.85) !important;
+}
+
+/* Home button customization - slate blue with transparency */
+.homeButton {
+  background: rgba(6, 79, 114, 0.85) !important;
+}
+
+/* Menu button customization - nordic blue */
+.menuButton {
+  background: var(--color-nordic-blue-transparent) !important;
+  border: 5px solid var(--color-nordic-blue) !important;
+  backdrop-filter: blur(10px);
+}
+
+.menuButton:hover {
+  background: var(--color-nordic-blue-transparent-dark) !important;
+  box-shadow: 0 4px 20px var(--shadow-nordic-blue-80) !important;
+  transform: scale(1.02);
+}
+
+/* End Session button customization - cardinal red with transparency */
+.endSessionButton {
+  background: rgba(206, 25, 60, 0.85) !important;
+  border: 5px solid rgba(206, 25, 60, 0.9) !important;
+  box-shadow: none !important;
+}
+
+.endSessionButton:hover {
+  background: rgba(206, 25, 60, 0.9) !important;
+  box-shadow: 0 4px 20px rgba(206, 25, 60, 0.5), 0 0 30px rgba(206, 25, 60, 0.6) !important;
+  transform: scale(1.02);
+}
+

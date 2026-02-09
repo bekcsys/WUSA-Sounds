@@ -1,0 +1,21 @@
+[Unit]
+Description=JJ9 Hz Sound Player Frontend (Next.js)
+After=network.target sound-player-backend.service
+Wants=network-online.target
+Requires=sound-player-backend.service
+
+[Service]
+Type=simple
+User=admin
+WorkingDirectory=/home/admin/Python
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="NODE_ENV=production"
+ExecStart=/home/admin/Python/start-frontend.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
