@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
     padding: 0,
     minHeight: 0,
     overflow: "hidden",
-    borderWidth: 0,
+    borderWidth: 5,
     borderColor: "orange",
+    backgroundColor: "transparent",
   },
   topHalf: {
     flex: 1,

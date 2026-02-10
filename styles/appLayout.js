@@ -101,3 +101,40 @@ export function getMobileGridStyles(width, height, gridPadding, gap, logoAreaHei
     },
   };
 }
+
+export function getMediaPlayerLayout(isTablet, width, height) {
+  const gridPadding = isTablet ? 24 : 16;
+  const contentPadding = isTablet ? 24 : 12;
+  const availableWidth = width - gridPadding * 2;
+  const controlCount = 4;
+  const gap = isTablet ? 16 : 10;
+  const minControlSize = isTablet ? 80 : 52;
+  const maxControlSize = isTablet ? 80 : 64;
+  const controlSizeFromWidth = (availableWidth - (controlCount - 1) * gap - contentPadding * 2) / controlCount;
+  const controlSize = Math.min(
+    maxControlSize,
+    Math.max(minControlSize, Math.floor(controlSizeFromWidth))
+  );
+  const iconSize = isTablet ? 38 : 28;
+  const labelFontSize = isTablet ? 18 : 14;
+  return {
+    contentPadding,
+    titleFontSize: isTablet ? 34 : 22,
+    trackLabelFontSize: isTablet ? 24 : 18,
+    trackLabelMarginBottom: isTablet ? 24 : 16,
+    controlSize,
+    controlGap: gap,
+    controlIconSize: iconSize,
+    controlLabelFontSize: labelFontSize,
+    timeTextFontSize: isTablet ? 18 : 15,
+    homeLabelFontSize: isTablet ? 18 : 16,
+    controlsPaddingVertical: isTablet ? 24 : 16,
+    controlsPaddingHorizontal: isTablet ? 20 : 12,
+    controlsMarginBottom: isTablet ? 20 : 12,
+    controlsBorderRadius: isTablet ? 20 : 16,
+    backButtonTop: isTablet ? 16 : 8,
+    backButtonLeft: isTablet ? 24 : 16,
+    volumeIconSize: isTablet ? 24 : 20,
+    maxContentWidth: isTablet ? 520 : availableWidth,
+  };
+}
