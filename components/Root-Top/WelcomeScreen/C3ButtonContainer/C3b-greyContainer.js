@@ -29,7 +29,7 @@ export default function C3bGreyContainer({
               key={opt.id}
               logo={opt.logo}
               label={opt.label}
-              onPress={onPress}
+              onPress={() => onPress(opt)}
               size={portraitGrid.displaySize}
               containerStyle={portraitGrid.cellStyle}
             />
