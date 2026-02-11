@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { View, StatusBar, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import C1RootTop from "./components/Root-Top";
-import WelcomeScreenContainer from "./components/Root-Top/WelcomeScreen/WelcomeScreenContainer";
-import MediaPlayerScreenContainer from "./components/Root-Top/MediaPlayerScreen/MediaPlayerScreenContainer";
-import C1RootBottomFooter from "./components/xRoot-Footer/C1Root-Bottom-Footer";
-import layout from "./styles/globalLayout";
+import C1RootTop from "./components";
+import WelcomeScreenContainer from "./components/WelcomeScreen/WelcomeScreenContainer";
+import MediaPlayerScreenContainer from "./components/MediaPlayerScreen/MediaPlayerScreenContainer";
+import { solfeggioTracks } from "./components/MediaPlayerScreen/solfeggioTracks";
+import FooterComponent from "./components/FooterComponent";
+import { useLayout } from "./styles/globalLayout";
 import { getLogoSize } from "./styles/appLayout";
 
 const WUSALogo = require("./assets/images/L01-WUSA.png");
@@ -24,17 +25,20 @@ const OPTIONS = [
 ];
 
 export default function App() {
+  const layout = useLayout();
   const { width } = useWindowDimensions();
   const isTablet = width >= TABLET_BREAKPOINT;
-  const { companyLogoHeight, companyLogoWidth, logoMarginBottom } =
-    getLogoSize(isTablet);
+  const { companyLogoHeight, companyLogoWidth } =
+    getLogoSize(isTablet, width);
 
   const [showMediaPlayer, setShowMediaPlayer] = useState(false);
   const [mediaPlayerTitle, setMediaPlayerTitle] = useState("");
+  const [mediaPlayerTracks, setMediaPlayerTracks] = useState([]);
 
   const handleOptionPress = (opt) => {
     if (opt.id === "solfeggio" || opt.id === "ambient") {
       setMediaPlayerTitle(opt.label);
+      setMediaPlayerTracks(opt.id === "solfeggio" ? solfeggioTracks : []);
       setShowMediaPlayer(true);
     }
   };
@@ -43,6 +47,7 @@ export default function App() {
     <MediaPlayerScreenContainer
       title={mediaPlayerTitle}
       onBack={() => setShowMediaPlayer(false)}
+      tracks={mediaPlayerTracks}
     />
   ) : (
     <WelcomeScreenContainer
@@ -52,29 +57,18 @@ export default function App() {
   );
 
   return (
-    <SafeAreaView style={layout["safeArea-OuterLayout"]}>
+    <SafeAreaView style={layout.safeArea}>
       <StatusBar barStyle="dark-content" />
-      <View style={layout.innerLayout}>
-        <View
-          style={{
-            flex: 1,
-            width: "100%",
-            alignSelf: "stretch",
-            marginBottom: 10,
-          }}
-        >
+      <View style={layout.displayArea}>
           <C1RootTop
             logoSource={WUSALogo}
             logoWidth={companyLogoWidth}
             logoHeight={companyLogoHeight}
-            logoMarginBottom={logoMarginBottom}
-            isTablet={isTablet}
           >
-            {content}
-          </C1RootTop>
-        </View>
+          {content}
+        </C1RootTop>
+        <FooterComponent isTablet={isTablet} />
       </View>
-      <C1RootBottomFooter isTablet={isTablet} />
     </SafeAreaView>
   );
 }

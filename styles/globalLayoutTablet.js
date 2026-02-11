@@ -1,0 +1,88 @@
+import { StyleSheet } from "react-native";
+
+export const layoutConstants = {
+  containerPadding: 20,
+  cardBorderRadius: 20,
+  cardPadding: 24,
+  cardPaddingMobile: 16,
+  safeAreaBackground: "transparent",
+  cardBackground: "#FF0000",
+};
+
+export default StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "transparent",
+    borderRadius: 20,
+    borderColor: "brown",
+    borderWidth: 0,
+  },
+
+  displayArea: {
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    padding: 0,
+    backgroundColor: layoutConstants.safeAreaBackground,
+    borderRadius: 20,
+    borderColor: "red",
+    borderWidth: 1,
+  },
+
+  rootTop: {
+    flex: 1,
+    width: "100%",
+    height: "88%",
+    alignSelf: "stretch",
+    padding: 0,
+    minHeight: 0,
+    maxHeight: "100%",
+    borderColor: "orange",
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  rootTopContentTop: {
+    flex: 0.4,
+    minHeight: 0,
+    overflow: "hidden",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 0,
+    borderColor: "grey",
+    borderRadius: 16,
+    borderWidth: 1,
+  },
+  rootTopContentBottom: {
+    flex: 0.6,
+    minHeight: 0,
+    overflow: "hidden",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "stretch",
+    paddingTop: 0,
+    paddingBottom: 20,
+    borderColor: "grey",
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  rootBottomFooter: {
+    width: "100%",
+    height: "12%",
+    maxHeight: "100%",
+    flexShrink: 0,
+    borderColor: "orange",
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  rootBottomFooterContent: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "grey",
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+});

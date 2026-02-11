@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { scrollButtonBg, scrollButtonText } from "./brandColors";
 
 export default StyleSheet.create({
   left: {
@@ -9,7 +10,7 @@ export default StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: "rgba(0,0,0,0.15)",
+    backgroundColor: scrollButtonBg,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -21,12 +22,12 @@ export default StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: "rgba(0,0,0,0.15)",
+    backgroundColor: scrollButtonBg,
     justifyContent: "center",
     alignItems: "center",
   },
   text: {
-    color: "rgba(0,0,0,0.5)",
+    color: scrollButtonText,
     fontSize: 16,
     fontWeight: "600",
   },

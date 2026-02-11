@@ -1,3 +1,10 @@
+const TABLET_BREAKPOINT = 600;
+const SMALL_TABLET_MAX_WIDTH = 900;
+
+export function isSmallTablet(width) {
+  return width >= TABLET_BREAKPOINT && width < SMALL_TABLET_MAX_WIDTH;
+}
+
 /**
  * Dynamic layout values computed from dimensions.
  * Used by App.js - import getLayoutStyles(dimensions) and spread where needed.
@@ -8,11 +15,12 @@ export function getCardLayout(isTablet, width, height) {
   return { width: cardWidth, height: cardHeight };
 }
 
-export function getLogoSize(isTablet) {
+export function getLogoSize(isTablet, width = 0) {
+  const small = isTablet && isSmallTablet(width);
   return {
-    companyLogoHeight: isTablet ? 225 : 125,
-    companyLogoWidth: isTablet ? 450 : 275,
-    logoMarginBottom: isTablet ? 32 : 12,
+    companyLogoHeight: small ? 165 : isTablet ? 225 : 125,
+    companyLogoWidth: small ? 330 : isTablet ? 450 : 275,
+    logoMarginBottom: small ? 20 : isTablet ? 32 : 12,
   };
 }
 
@@ -39,12 +47,12 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
   }
   const maxDisplayByHeight = Math.floor((availableGridHeight - rowContentHeight) / 0.88);
   let displaySize = Math.min(buttonSize * 2, maxDisplayByHeight);
-  
+
   if (isTablet) {
     const maxDisplayByWidth = (availableGridWidth - gap * gapCount) / columns;
     displaySize = Math.min(displaySize, maxDisplayByWidth);
   }
-  
+
   const rowWidth = displaySize * columns + gap * gapCount;
   const maxScroll = Math.max(0, rowWidth - (cardWidth - gridPadding * 2));
   const stripHeight = Math.round(displaySize * 0.88) + 34;
@@ -61,6 +69,11 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
     },
     maxScroll,
   };
+}
+
+export function getTabletPortraitDisplaySize(width) {
+  if (width >= TABLET_BREAKPOINT && width < SMALL_TABLET_MAX_WIDTH) return 170;
+  return 210;
 }
 
 export function getTabletPortraitGridStyles(gap, displaySize) {
@@ -103,38 +116,39 @@ export function getMobileGridStyles(width, height, gridPadding, gap, logoAreaHei
 }
 
 export function getMediaPlayerLayout(isTablet, width, height) {
-  const gridPadding = isTablet ? 24 : 16;
-  const contentPadding = isTablet ? 24 : 12;
+  const small = isTablet && isSmallTablet(width);
+  const gridPadding = small ? 20 : isTablet ? 24 : 16;
+  const contentPadding = small ? 20 : isTablet ? 24 : 12;
   const availableWidth = width - gridPadding * 2;
   const controlCount = 4;
-  const gap = isTablet ? 16 : 10;
-  const minControlSize = isTablet ? 80 : 52;
-  const maxControlSize = isTablet ? 80 : 64;
+  const gap = small ? 12 : isTablet ? 16 : 10;
+  const minControlSize = small ? 64 : isTablet ? 80 : 52;
+  const maxControlSize = small ? 72 : isTablet ? 80 : 64;
   const controlSizeFromWidth = (availableWidth - (controlCount - 1) * gap - contentPadding * 2) / controlCount;
   const controlSize = Math.min(
     maxControlSize,
     Math.max(minControlSize, Math.floor(controlSizeFromWidth))
   );
-  const iconSize = isTablet ? 38 : 28;
-  const labelFontSize = isTablet ? 18 : 14;
+  const iconSize = small ? 32 : isTablet ? 38 : 28;
+  const labelFontSize = small ? 15 : isTablet ? 18 : 14;
   return {
     contentPadding,
-    titleFontSize: isTablet ? 34 : 22,
-    trackLabelFontSize: isTablet ? 24 : 18,
-    trackLabelMarginBottom: isTablet ? 24 : 16,
+    titleFontSize: small ? 26 : isTablet ? 34 : 22,
+    trackLabelFontSize: small ? 18 : isTablet ? 24 : 18,
+    trackLabelMarginBottom: small ? 18 : isTablet ? 24 : 16,
     controlSize,
     controlGap: gap,
     controlIconSize: iconSize,
     controlLabelFontSize: labelFontSize,
-    timeTextFontSize: isTablet ? 18 : 15,
-    homeLabelFontSize: isTablet ? 18 : 16,
-    controlsPaddingVertical: isTablet ? 24 : 16,
-    controlsPaddingHorizontal: isTablet ? 20 : 12,
-    controlsMarginBottom: isTablet ? 20 : 12,
-    controlsBorderRadius: isTablet ? 20 : 16,
+    timeTextFontSize: small ? 15 : isTablet ? 18 : 15,
+    homeLabelFontSize: small ? 15 : isTablet ? 18 : 16,
+    controlsPaddingVertical: small ? 18 : isTablet ? 24 : 16,
+    controlsPaddingHorizontal: small ? 16 : isTablet ? 20 : 12,
+    controlsMarginBottom: small ? 14 : isTablet ? 20 : 12,
+    controlsBorderRadius: small ? 16 : isTablet ? 20 : 16,
     backButtonTop: isTablet ? 16 : 8,
     backButtonLeft: isTablet ? 24 : 16,
     volumeIconSize: isTablet ? 24 : 20,
-    maxContentWidth: isTablet ? 520 : availableWidth,
+    maxContentWidth: small ? 440 : isTablet ? 520 : availableWidth,
   };
 }
