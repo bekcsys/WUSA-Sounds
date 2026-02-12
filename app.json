@@ -1,10 +1,12 @@
 {
   "expo": {
-    "name": "DoneWizIt",
-    "slug": "DoneWizIt",
+    "name": "WUSA IR Sauna",
+    "slug": "wusa-irsauna",
     "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "updates": { "url": "https://u.expo.dev/d4ea0ef7-3ee8-4781-ac7e-6587ac6f22b2" },
+    "icon": "./assets/images/AppIcon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -15,18 +17,29 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["audio"]
-      }
+        "UIBackgroundModes": [
+          "audio",
+          "audio"
+        ],
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.bekalue.tkh.wusairsauna"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/AppIcon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.bekalue.tkh.wusairsauna"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d4ea0ef7-3ee8-4781-ac7e-6587ac6f22b2"
+      }
     }
   }
 }
