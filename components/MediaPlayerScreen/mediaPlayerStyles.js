@@ -4,9 +4,9 @@ import {
   navyMuted,
   navyBorder,
   navyAccent,
-  brandBg,
   brandCard,
 } from "../brandColors";
+import { layoutConstants } from "../../styles/globalLayoutTablet";
 
 export default StyleSheet.create({
   container: {
@@ -15,7 +15,22 @@ export default StyleSheet.create({
     minHeight: 0,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: brandBg,
+    backgroundColor: layoutConstants.appBackground,
+  },
+  visualizationImageWrap: {
+    alignSelf: "center",
+    marginBottom: 4,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  visualizationImage: {
+    width: 10,
+    height: 10,
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: navyBorder,
+    backgroundColor: "rgba(30, 58, 95, 0.06)",
+    overflow: "hidden",
   },
   homeButtonContainer: {
     width: "100%",

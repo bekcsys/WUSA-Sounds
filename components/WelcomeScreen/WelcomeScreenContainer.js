@@ -15,6 +15,8 @@ import {
   getMobileGridStyles,
   getTabletPortraitGridStyles,
   getTabletPortraitDisplaySize,
+  getVisibleHeightForTwoRows,
+  getVisibleWidthForFourButtons,
 } from "../../styles/appLayout";
 import {
   TABLET_BREAKPOINT,
@@ -91,12 +93,24 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
       TABLET_PORTRAIT_GAP,
       displaySize,
     );
+    const visibleHeight = getVisibleHeightForTwoRows(
+      portraitGrid.displaySize,
+      TABLET_PORTRAIT_GAP,
+    );
     return (
-      <View
+      <ScrollView
         style={[
+          buttonLayoutStyles.scrollView,
+          { flex: 1, maxHeight: visibleHeight },
+        ]}
+        contentContainerStyle={[
           buttonLayoutStyles.buttonsGrid,
           portraitGrid.gridStyle,
+          buttonLayoutStyles.scrollContent,
         ]}
+        showsVerticalScrollIndicator={true}
+        bounces={false}
+        decelerationRate="normal"
       >
         <OptionButtons
           options={options}
@@ -104,22 +118,34 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
           size={portraitGrid.displaySize}
           containerStyle={portraitGrid.cellStyle}
         />
-      </View>
+      </ScrollView>
     );
   }
 
   if (isTablet) {
+    const visibleWidth = getVisibleWidthForFourButtons(strip.displaySize, gap);
+    const stripMaxScroll = Math.max(0, strip.rowWidth - visibleWidth);
+    const scrollLeftTablet = () => {
+      const next = Math.max(0, scrollOffset - scrollStep);
+      scrollRef.current?.scrollTo({ x: next, animated: true });
+      setScrollOffset(next);
+    };
+    const scrollRightTablet = () => {
+      const next = Math.min(stripMaxScroll, scrollOffset + scrollStep);
+      scrollRef.current?.scrollTo({ x: next, animated: true });
+      setScrollOffset(next);
+    };
     return (
       <View
         style={[
           buttonLayoutStyles.buttonsGrid,
           buttonLayoutStyles.buttonsGridScroll,
-          { width: strip.rowWidth + STRIP_WIDTH_OFFSET },
+          { width: visibleWidth },
         ]}
       >
-          {strip.maxScroll > 0 && scrollOffset > 0 && (
+          {stripMaxScroll > 0 && scrollOffset > 0 && (
             <TouchableOpacity
-              onPress={scrollLeft}
+              onPress={scrollLeftTablet}
               style={scrollButtons.left}
               activeOpacity={0.8}
             >
@@ -129,14 +155,15 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
           <ScrollView
             ref={scrollRef}
             horizontal
-            showsHorizontalScrollIndicator={false}
+            showsHorizontalScrollIndicator={true}
             contentContainerStyle={[
               buttonLayoutStyles.scrollContent,
-              strip.maxScroll === 0 && buttonLayoutStyles.scrollContentCentered,
+              stripMaxScroll === 0 && buttonLayoutStyles.scrollContentCentered,
             ]}
             style={buttonLayoutStyles.scrollView}
             onScroll={(e) => setScrollOffset(e.nativeEvent.contentOffset.x)}
             scrollEventThrottle={SCROLL_EVENT_THROTTLE}
+            decelerationRate="normal"
           >
             <View style={strip.rowStyle}>
               <OptionButtons
@@ -147,9 +174,9 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
               />
             </View>
           </ScrollView>
-          {strip.maxScroll > 0 && scrollOffset < strip.maxScroll - 1 && (
+          {stripMaxScroll > 0 && scrollOffset < stripMaxScroll - 1 && (
             <TouchableOpacity
-              onPress={scrollRight}
+              onPress={scrollRightTablet}
               style={scrollButtons.right}
               activeOpacity={0.8}
             >
@@ -160,14 +187,31 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
     );
   }
 
+  const visibleHeight = getVisibleHeightForTwoRows(
+    mobileGrid.displaySize,
+    gap,
+  );
   return (
-    <View style={[buttonLayoutStyles.buttonsGrid, mobileGrid.gridStyle]}>
+    <ScrollView
+      style={[
+        buttonLayoutStyles.scrollView,
+        { flex: 1, maxHeight: visibleHeight },
+      ]}
+      contentContainerStyle={[
+        buttonLayoutStyles.buttonsGrid,
+        mobileGrid.gridStyle,
+        buttonLayoutStyles.scrollContent,
+      ]}
+      showsVerticalScrollIndicator={true}
+      bounces={false}
+      decelerationRate="normal"
+    >
       <OptionButtons
         options={options}
         onPress={onOptionPress}
         size={mobileGrid.displaySize}
         containerStyle={mobileGrid.cellStyle}
       />
-    </View>
+    </ScrollView>
   );
 }

@@ -1,16 +1,17 @@
 import React from "react";
 import { View } from "react-native";
 import mediaPlayerStyles from "./mediaPlayerStyles";
-import { brandBg, brandCard } from "../brandColors";
+import { brandCard } from "../brandColors";
+import { layoutConstants } from "../../styles/globalLayoutTablet";
 
 export function getRootStyle(layout, isTablet, isTabletPortrait) {
   return [
     mediaPlayerStyles.container,
     {
-      backgroundColor: brandBg,
+      backgroundColor: layoutConstants.appBackground,
       padding: layout.contentPadding,
-      justifyContent: isTablet ? "center" : "flex-start",
-      flex: isTablet ? 1 : 0,
+      justifyContent: isTablet ? "center" : "flex-end",
+      flex: 1,
       alignSelf: "stretch",
       ...(isTabletPortrait && {
         paddingTop: 24,

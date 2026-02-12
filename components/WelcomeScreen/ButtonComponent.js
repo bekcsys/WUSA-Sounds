@@ -34,12 +34,12 @@ function getLabelStyle(width) {
   const isTablet = width >= TABLET_BREAKPOINT;
   const small = isTablet && isSmallTablet(width);
   if (!isTablet) {
-    return { marginTop: 6, fontSize: 14 };
+    return { marginTop: 4, fontSize: 12 };
   }
   if (small) {
-    return { marginTop: 7, fontSize: 16 };
+    return { marginTop: 4, fontSize: 13 };
   }
-  return { marginTop: 8, fontSize: 18 };
+  return { marginTop: 5, fontSize: 15 };
 }
 
 export const buttonLayoutStyles = StyleSheet.create({
@@ -82,10 +82,11 @@ const styles = StyleSheet.create({
   },
   logo: {},
   labelBase: {
-    fontWeight: "600",
+    fontWeight: "500",
     color: textPrimary,
     textAlign: "center",
     maxWidth: "100%",
+    paddingHorizontal: 2,
   },
 });
 

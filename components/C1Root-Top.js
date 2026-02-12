@@ -8,16 +8,19 @@ export default function C1RootTop({
   logoWidth,
   logoHeight,
   children,
+  compactHeader = false,
 }) {
   const layout = useLayout();
+  const topStyle = compactHeader ? layout.dispContTopCompact : layout.dispContTop;
+  const bottomStyle = compactHeader ? layout.dispContBottomCompact : layout.dispContBottom;
 
   return (
     <View style={layout.displayRoot}>
-      <View style={layout.dispContTop}>
+      <View style={topStyle}>
         <LogoComponent source={logoSource} width={logoWidth} height={logoHeight} />
       </View>
-      <View style={layout.dispContBottom}>
-        <View style={layout.dispContTopWrapper}>{children}</View>
+      <View style={bottomStyle}>
+        {compactHeader ? children : <View style={layout.dispContTopWrapper}>{children}</View>}
       </View>
     </View>
   );

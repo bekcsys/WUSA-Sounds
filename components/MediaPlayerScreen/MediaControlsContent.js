@@ -28,11 +28,16 @@ export default function MediaControlsContent({
         onPrev={onPrev}
         onNext={onNext}
         onShuffle={onShuffle}
+        onBack={isTablet ? onBack : undefined}
       />
-      <View style={mediaPlayerStyles.controlsDivider} />
-      <View style={mediaPlayerStyles.controlsFooterRow}>
-        <HomeButtonContent onPress={onBack} homeLabelFontSize={layout?.homeLabelFontSize} />
-      </View>
+      {!isTablet && (
+        <>
+          <View style={mediaPlayerStyles.controlsDivider} />
+          <View style={mediaPlayerStyles.controlsFooterRow}>
+            <HomeButtonContent onPress={onBack} homeLabelFontSize={layout?.homeLabelFontSize} />
+          </View>
+        </>
+      )}
     </>
   );
 }

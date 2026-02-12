@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Text } from "react-native";
+import { Text, View, Image } from "react-native";
 import mediaPlayerStyles from "./mediaPlayerStyles";
 import {
   MediaPlayerRootContainer,
@@ -18,7 +18,12 @@ import { useMediaPlayerPlayback } from "./useMediaPlayerPlayback";
  * Media player screen: layout and playback are handled by hooks;
  * this component composes containers and passes memoized styles and props.
  */
-export default function MediaPlayerScreen({ title, onBack, tracks = [] }) {
+export default function MediaPlayerScreen({
+  title,
+  onBack,
+  tracks = [],
+  visualizationImage,
+}) {
   const { layout, isTablet, isTabletPortrait } = useMediaPlayerLayout();
   const playback = useMediaPlayerPlayback(tracks);
 
@@ -54,21 +59,30 @@ export default function MediaPlayerScreen({ title, onBack, tracks = [] }) {
 
   return (
     <MediaPlayerRootContainer style={rootStyle}>
-      <Text style={categoryTitleStyle}>{title || "Media Player"}</Text>
-      <Text style={trackNameStyle}>
-        {playback.currentTrackTitle ?? `Track ${playback.currentTrackIndex + 1}`}
-      </Text>
-      <MediaTimeContainer style={mediaTimeStyle}>
-        <MediaTimeContent
-          progress={playback.progress}
-          currentTimeSec={playback.currentTimeSec}
-          durationSec={playback.durationSec}
-          formatTime={playback.formatTime}
-          timeTextFontSize={layout.timeTextFontSize}
-          onSeek={playback.handlers?.onSeek}
-        />
-      </MediaTimeContainer>
+      {visualizationImage != null && (
+        <View style={mediaPlayerStyles.visualizationImageWrap}>
+          <Image
+            source={visualizationImage}
+            style={mediaPlayerStyles.visualizationImage}
+            resizeMode="cover"
+          />
+        </View>
+      )}
       <MediaControlsContainer style={controlsStyle}>
+        <Text style={categoryTitleStyle}>{title || "Media Player"}</Text>
+        <Text style={trackNameStyle}>
+          {playback.currentTrackTitle ?? `Track ${playback.currentTrackIndex + 1}`}
+        </Text>
+        <MediaTimeContainer style={mediaTimeStyle}>
+          <MediaTimeContent
+            progress={playback.progress}
+            currentTimeSec={playback.currentTimeSec}
+            durationSec={playback.durationSec}
+            formatTime={playback.formatTime}
+            timeTextFontSize={layout.timeTextFontSize}
+            onSeek={playback.handlers?.onSeek}
+          />
+        </MediaTimeContainer>
         <MediaControlsContent
           isTablet={isTablet}
           layout={layout}

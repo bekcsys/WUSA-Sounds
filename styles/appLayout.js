@@ -15,12 +15,23 @@ export function getCardLayout(isTablet, width, height) {
   return { width: cardWidth, height: cardHeight };
 }
 
-export function getLogoSize(isTablet, width = 0) {
+export function getLogoSize(isTablet, width = 0, compact = false) {
   const small = isTablet && isSmallTablet(width);
+  const height = small ? 165 : isTablet ? 225 : 125;
+  const widthVal = small ? 330 : isTablet ? 450 : 275;
+  const marginBottom = small ? 20 : isTablet ? 32 : 12;
+  if (compact) {
+    const scale = 0.4;
+    return {
+      companyLogoHeight: Math.round(height * scale),
+      companyLogoWidth: Math.round(widthVal * scale),
+      logoMarginBottom: Math.round(marginBottom * scale),
+    };
+  }
   return {
-    companyLogoHeight: small ? 165 : isTablet ? 225 : 125,
-    companyLogoWidth: small ? 330 : isTablet ? 450 : 275,
-    logoMarginBottom: small ? 20 : isTablet ? 32 : 12,
+    companyLogoHeight: height,
+    companyLogoWidth: widthVal,
+    logoMarginBottom: marginBottom,
   };
 }
 
@@ -32,15 +43,15 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
   const availableGridHeight = cardHeight - gridPadding * 2 - logoAreaHeight - labelHeight * 2;
   const rowContentHeight = 34;
   const maxButtonSizeFromHeight = Math.floor((availableGridHeight - rowContentHeight) / 0.88);
-  const maxButtonSizeTablet = 92;
-  const minButtonSizeMobile = 68;
+  const maxButtonSizeTablet = 78;
+  const minButtonSizeMobile = 60;
   const rawButtonSize = availableGridWidth / columns;
   const buttonSizeRaw = Math.min(
     rawButtonSize,
     maxButtonSizeFromHeight,
     isTablet ? maxButtonSizeTablet : rawButtonSize
   );
-  let buttonSize = Math.round(buttonSizeRaw * 0.82);
+  let buttonSize = Math.round(buttonSizeRaw * 0.76);
   if (!isTablet && buttonSize < minButtonSizeMobile) buttonSize = minButtonSizeMobile;
   if (!isTablet && buttonSize > maxButtonSizeFromHeight) {
     buttonSize = Math.max(minButtonSizeMobile, maxButtonSizeFromHeight);
@@ -72,9 +83,11 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
 }
 
 export function getTabletPortraitDisplaySize(width) {
-  if (width >= TABLET_BREAKPOINT && width < SMALL_TABLET_MAX_WIDTH) return 140;
-  return 170;
+  if (width >= TABLET_BREAKPOINT && width < SMALL_TABLET_MAX_WIDTH) return 122;
+  return 148;
 }
+
+export const BUTTON_ROW_LABEL_HEIGHT = 34;
 
 export function getTabletPortraitGridStyles(gap, displaySize) {
   const gridWidth = displaySize * 2 + gap;
@@ -91,6 +104,15 @@ export function getTabletPortraitGridStyles(gap, displaySize) {
   };
 }
 
+export function getVisibleHeightForTwoRows(displaySize, gap) {
+  const rowHeight = Math.round(displaySize * 0.88) + BUTTON_ROW_LABEL_HEIGHT;
+  return 2 * rowHeight + gap;
+}
+
+export function getVisibleWidthForFourButtons(displaySize, gap) {
+  return 4 * displaySize + 3 * gap;
+}
+
 export function getMobileGridStyles(width, height, gridPadding, gap, logoAreaHeight) {
   const labelHeight = 26;
   const availableWidth = width - gridPadding * 2 - gap;
@@ -99,9 +121,9 @@ export function getMobileGridStyles(width, height, gridPadding, gap, logoAreaHei
   const rowContentHeight = 34;
   const sizeFromHeight = Math.floor((availableHeight - rowContentHeight) / 2 / 0.88);
   const displaySize = Math.min(sizeFromWidth, sizeFromHeight);
-  const minButtonSize = 68;
+  const minButtonSize = 60;
   const rawSize = Math.max(minButtonSize, Math.round(displaySize));
-  const size = Math.max(minButtonSize, Math.round(rawSize * 0.82));
+  const size = Math.max(minButtonSize, Math.round(rawSize * 0.76));
   const gridWidth = size * 2 + gap;
   return {
     displaySize: size,
