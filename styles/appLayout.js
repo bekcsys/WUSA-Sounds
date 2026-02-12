@@ -173,6 +173,6 @@ export function getMediaPlayerLayout(isTablet, width, height) {
     backButtonTop: isTablet ? 16 : 8,
     backButtonLeft: isTablet ? 24 : 16,
     volumeIconSize: isTablet ? 24 : 20,
-    maxContentWidth: small ? 560 : isTablet ? 700 : availableWidth,
+    maxContentWidth: small ? 560 : isTablet ? 700 : width - contentPadding * 2,
   };
 }

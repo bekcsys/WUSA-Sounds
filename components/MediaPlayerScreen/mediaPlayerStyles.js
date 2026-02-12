@@ -5,6 +5,7 @@ import {
   navyBorder,
   navyAccent,
   brandCard,
+  BRAND_COLOR,
 } from "../brandColors";
 import { layoutConstants } from "../../styles/globalLayoutTablet";
 
@@ -44,8 +45,8 @@ export default StyleSheet.create({
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    borderWidth: 4,
-    borderColor: navyPrimary,
+    borderWidth: 1,
+    borderColor: navyBorder,
     backgroundColor: "rgba(30, 58, 95, 0.08)",
     overflow: "hidden",
     shadowColor: "#000",
@@ -81,12 +82,12 @@ export default StyleSheet.create({
   },
   tabletTitleText: {
     fontWeight: "700",
-    color: navyPrimary,
+    color: BRAND_COLOR,
     marginBottom: 6,
     textAlign: "left",
   },
   tabletTrackText: {
-    color: navyMuted,
+    color: navyPrimary,
     textAlign: "left",
   },
   homeButtonContainer: {
@@ -121,13 +122,13 @@ export default StyleSheet.create({
   },
   categoryTitle: {
     fontWeight: "700",
-    color: navyPrimary,
+    color: BRAND_COLOR,
     marginBottom: 8,
     textAlign: "center",
   },
   trackName: {
     fontSize: 18,
-    color: navyMuted,
+    color: navyPrimary,
     marginBottom: 24,
     textAlign: "center",
   },
