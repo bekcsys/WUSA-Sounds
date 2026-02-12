@@ -6,22 +6,21 @@ import WelcomeScreenContainer from "../components/WelcomeScreen/WelcomeScreenCon
 import FooterComponent from "../components/FooterComponent";
 import { solfeggioTracks } from "../components/MediaPlayerScreen/solfeggioTracks";
 import { triBowlTracks } from "../components/MediaPlayerScreen/triBowlTracks";
+import { ambientSoundsTracks } from "../components/MediaPlayerScreen/ambientSoundsTracks";
 import { useLayout, TABLET_BREAKPOINT } from "../styles/globalLayout";
 import { getLogoSize } from "../styles/appLayout";
 
 const WUSALogo = require("../assets/images/L01-WUSA.png");
 const SaunaControlLogo = require("../assets/images/SunaControlLogo.png");
 const SolfeggioLogo = require("../assets/images/SoundFreqenciesLogo.png");
-const EntertainmentLogo = require("../assets/images/EntertinmnetLogo.png");
-
-const MEDIA_TRACKS = { solfeggio: solfeggioTracks, tribowl: triBowlTracks };
+const MEDIA_TRACKS = { solfeggio: solfeggioTracks, tribowl: triBowlTracks, ambient: ambientSoundsTracks };
 const MEDIA_IDS = Object.keys(MEDIA_TRACKS);
 
 const OPTIONS = [
   { id: "sauna", label: "Sauna Control", logo: SaunaControlLogo },
   { id: "solfeggio", label: "Solfeggio Sounds", logo: SolfeggioLogo },
-  { id: "tribowl", label: "Tri Bowl", logo: SolfeggioLogo },
-  { id: "entertainment", label: "Entertainment", logo: EntertainmentLogo },
+  { id: "tribowl", label: "TriBowl Sounds", logo: SolfeggioLogo },
+  { id: "ambient", label: "Ambient Sounds", logo: SolfeggioLogo },
 ];
 
 export default function WelcomePage({ onOpenMediaPlayer }) {

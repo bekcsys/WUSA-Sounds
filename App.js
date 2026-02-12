@@ -1,11 +1,16 @@
 import React, { useState, useCallback } from "react";
 import WelcomePage from "./pages/WelcomePage";
 import MediaPlayerPage from "./pages/MediaPlayerPage";
+import { useMediaPlayerPlayback } from "./components/MediaPlayerScreen/useMediaPlayerPlayback";
 
 export default function App() {
   const [mediaPlayerTitle, setMediaPlayerTitle] = useState("");
   const [mediaPlayerTracks, setMediaPlayerTracks] = useState([]);
   const [showMediaPlayer, setShowMediaPlayer] = useState(false);
+
+  const playback = useMediaPlayerPlayback(
+    showMediaPlayer ? mediaPlayerTracks : []
+  );
 
   const handleOpenMediaPlayer = useCallback((title, tracks) => {
     setMediaPlayerTitle(title);
@@ -23,6 +28,7 @@ export default function App() {
         title={mediaPlayerTitle}
         tracks={mediaPlayerTracks}
         onBack={handleBackFromMediaPlayer}
+        playback={playback}
       />
     );
   }

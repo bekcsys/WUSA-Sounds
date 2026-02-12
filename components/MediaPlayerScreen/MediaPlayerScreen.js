@@ -12,20 +12,19 @@ import {
 import MediaTimeContent from "./MediaTimeContent";
 import MediaControlsContent from "./MediaControlsContent";
 import { useMediaPlayerLayout } from "./useMediaPlayerLayout";
-import { useMediaPlayerPlayback } from "./useMediaPlayerPlayback";
 
 /**
- * Media player screen: layout and playback are handled by hooks;
- * this component composes containers and passes memoized styles and props.
+ * Media player screen: layout from hook, playback from parent (App) so
+ * audio continues when app is backgrounded; only the in-app Home button stops it.
  */
 export default function MediaPlayerScreen({
   title,
   onBack,
   tracks = [],
   visualizationImage,
+  playback,
 }) {
   const { layout, isTablet, isTabletPortrait } = useMediaPlayerLayout();
-  const playback = useMediaPlayerPlayback(tracks);
 
   const rootStyle = useMemo(
     () => getRootStyle(layout, isTablet, isTabletPortrait),

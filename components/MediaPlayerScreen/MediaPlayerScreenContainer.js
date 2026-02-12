@@ -6,6 +6,7 @@ export default function MediaPlayerScreenContainer({
   onBack,
   tracks = [],
   visualizationImage,
+  playback,
 }) {
   return (
     <MediaPlayerScreen
@@ -13,6 +14,7 @@ export default function MediaPlayerScreenContainer({
       onBack={onBack}
       tracks={tracks}
       visualizationImage={visualizationImage}
+      playback={playback}
     />
   );
 }

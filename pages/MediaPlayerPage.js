@@ -8,10 +8,17 @@ import { useLayout, TABLET_BREAKPOINT } from "../styles/globalLayout";
 import { getLogoSize } from "../styles/appLayout";
 
 const WUSALogo = require("../assets/images/L01-WUSA.png");
-const SolfegVisualizationImage = require("../assets/images/solfeg.png");
-const TriBowlVisualizationImage = require("../assets/images/triB.jpg");
+const ThumbnailSolfeg = require("../assets/images/Thumbnail - solfeg.png");
+const ThumbnailTriBowl = require("../assets/images/Thumbnail - TriBowl.jpg");
+const ThumbnailAmbient = require("../assets/images/Thumbnail - Ambeint.png");
 
-export default function MediaPlayerPage({ title, tracks, onBack }) {
+function getVisualizationImage(title) {
+  if (title === "TriBowl Sounds") return ThumbnailTriBowl;
+  if (title === "Ambient Sounds") return ThumbnailAmbient;
+  return ThumbnailSolfeg;
+}
+
+export default function MediaPlayerPage({ title, tracks, onBack, playback }) {
   const layout = useLayout();
   const { width } = useWindowDimensions();
   const isTablet = width >= TABLET_BREAKPOINT;
@@ -20,8 +27,7 @@ export default function MediaPlayerPage({ title, tracks, onBack }) {
     width,
     true,
   );
-  const visualizationImage =
-    title === "Tri Bowl" ? TriBowlVisualizationImage : SolfegVisualizationImage;
+  const visualizationImage = getVisualizationImage(title);
 
   return (
     <SafeAreaView style={layout.safeArea} edges={["top", "bottom"]}>
@@ -38,6 +44,7 @@ export default function MediaPlayerPage({ title, tracks, onBack }) {
             onBack={onBack}
             tracks={tracks}
             visualizationImage={visualizationImage}
+            playback={playback}
           />
         </C1RootTop>
         <FooterComponent isTablet={isTablet} />
