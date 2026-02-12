@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Image, StyleSheet, useWindowDimensions } from "react-native";
-
-const TABLET_BREAKPOINT = 600;
+import { TABLET_BREAKPOINT } from "../../styles/globalLayout";
 
 function getWrapperStyle(width) {
   const isTablet = width >= TABLET_BREAKPOINT;

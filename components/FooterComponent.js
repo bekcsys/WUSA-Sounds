@@ -3,6 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import { useLayout } from "../styles/globalLayout";
 import { lineDivider } from "./brandColors";
 
+const FOOTER_TEXT_COLOR = "rgba(0, 0, 0, 0.22)";
+
 const styles = StyleSheet.create({
   line: {
     height: 1,
@@ -24,11 +26,11 @@ const styles = StyleSheet.create({
   },
   footerTextTablet: {
     fontSize: 16,
-    color: "rgba(0, 0, 0, 0.22)",
+    color: FOOTER_TEXT_COLOR,
   },
   footerTextMobile: {
     fontSize: 15,
-    color: "rgba(0, 0, 0, 0.22)",
+    color: FOOTER_TEXT_COLOR,
   },
 });
 

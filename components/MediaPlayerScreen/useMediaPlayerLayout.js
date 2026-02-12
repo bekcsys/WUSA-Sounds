@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { useWindowDimensions } from "react-native";
+import { TABLET_BREAKPOINT } from "../../styles/globalLayout";
 import { getMediaPlayerLayout } from "../../styles/appLayout";
-
-const TABLET_BREAKPOINT = 600;
 
 /**
  * Supplies layout and device flags for the media player.

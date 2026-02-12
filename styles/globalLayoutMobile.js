@@ -100,7 +100,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingTop: 2,
+    paddingTop: 3,
     borderColor: "grey",
     borderRadius: 30,
     borderWidth: 0,

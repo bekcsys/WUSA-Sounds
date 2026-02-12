@@ -1,4 +1,5 @@
-const TABLET_BREAKPOINT = 600;
+import { TABLET_BREAKPOINT } from "./globalLayout";
+
 const SMALL_TABLET_MAX_WIDTH = 900;
 
 export function isSmallTablet(width) {
@@ -10,7 +11,7 @@ export function isSmallTablet(width) {
  * Used by App.js - import getLayoutStyles(dimensions) and spread where needed.
  */
 export function getCardLayout(isTablet, width, height) {
-  const cardWidth = isTablet ? width * 0.92 : width * 0.92;
+  const cardWidth = width * 0.92;
   const cardHeight = isTablet ? height * 0.70 : cardWidth;
   return { width: cardWidth, height: cardHeight };
 }

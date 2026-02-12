@@ -2,7 +2,7 @@ import { useWindowDimensions } from "react-native";
 import layoutTablet from "./globalLayoutTablet";
 import layoutMobile from "./globalLayoutMobile";
 
-const TABLET_BREAKPOINT = 600;
+export const TABLET_BREAKPOINT = 600;
 
 export { layoutConstants } from "./globalLayoutTablet";
 export { default as layoutTablet } from "./globalLayoutTablet";

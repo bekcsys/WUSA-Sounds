@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View, StatusBar, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import C1RootTop from "./components";
@@ -7,7 +7,7 @@ import MediaPlayerScreenContainer from "./components/MediaPlayerScreen/MediaPlay
 import { solfeggioTracks } from "./components/MediaPlayerScreen/solfeggioTracks";
 import { triBowlTracks } from "./components/MediaPlayerScreen/triBowlTracks";
 import FooterComponent from "./components/FooterComponent";
-import { useLayout } from "./styles/globalLayout";
+import { useLayout, TABLET_BREAKPOINT } from "./styles/globalLayout";
 import { getLogoSize } from "./styles/appLayout";
 
 const WUSALogo = require("./assets/images/L01-WUSA.png");
@@ -16,7 +16,8 @@ const SolfeggioLogo = require("./assets/images/SoundFreqenciesLogo.png");
 const EntertainmentLogo = require("./assets/images/EntertinmnetLogo.png");
 const SolfegVisualizationImage = require("./assets/images/solfeg.png");
 
-const TABLET_BREAKPOINT = 600;
+const MEDIA_TRACKS = { solfeggio: solfeggioTracks, tribowl: triBowlTracks };
+const MEDIA_IDS = Object.keys(MEDIA_TRACKS);
 
 const OPTIONS = [
   { id: "sauna", label: "Sauna Control", logo: SaunaControlLogo },
@@ -36,18 +37,12 @@ export default function App() {
   const { companyLogoHeight, companyLogoWidth } =
     getLogoSize(isTablet, width, showMediaPlayer);
 
-  const handleOptionPress = (opt) => {
-    const mediaIds = ["solfeggio", "tribowl"];
-    if (mediaIds.includes(opt.id)) {
-      setMediaPlayerTitle(opt.label);
-      const tracksById = {
-        solfeggio: solfeggioTracks,
-        tribowl: triBowlTracks,
-      };
-      setMediaPlayerTracks(tracksById[opt.id] || []);
-      setShowMediaPlayer(true);
-    }
-  };
+  const handleOptionPress = useCallback((opt) => {
+    if (!MEDIA_IDS.includes(opt.id)) return;
+    setMediaPlayerTitle(opt.label);
+    setMediaPlayerTracks(MEDIA_TRACKS[opt.id] ?? []);
+    setShowMediaPlayer(true);
+  }, []);
 
   const content = showMediaPlayer ? (
     <MediaPlayerScreenContainer

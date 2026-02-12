@@ -7,10 +7,9 @@ import {
   StyleSheet,
   useWindowDimensions,
 } from "react-native";
+import { TABLET_BREAKPOINT } from "../../styles/globalLayout";
 import { isSmallTablet } from "../../styles/appLayout";
 import { BRAND_COLOR, NAVY_BORDER, textPrimary } from "../brandColors";
-
-const TABLET_BREAKPOINT = 600;
 
 export function getRedBoxStyle(size) {
   const redBoxSize = Math.round(size * 0.88);
