@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useLayout } from "../styles/globalLayout";
-import { textMuted, lineDivider } from "../styles/brandColors";
+import { textMuted, lineDivider } from "./brandColors";
 
 const styles = StyleSheet.create({
   line: {
@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
     backgroundColor: lineDivider,
   },
   footer: {
-    paddingVertical: 12,
+    paddingVertical: 6,
     paddingHorizontal: 16,
     alignItems: "center",
     flexShrink: 0,
   },
   footerTextTablet: {
-    fontSize: 20,
+    fontSize: 16,
     color: textMuted,
   },
   footerTextMobile: {
@@ -31,8 +31,8 @@ export default function FooterComponent({ isTablet }) {
     ? styles.footerTextTablet
     : styles.footerTextMobile;
   return (
-    <View style={layout.rootBottomFooter}>
-      <View style={layout.rootBottomFooterContent}>
+    <View style={layout.dispFooter}>
+      <View style={layout.dispFooterCont}>
         <View style={styles.line} />
         <View style={styles.footer}>
           <Text style={textStyle}>

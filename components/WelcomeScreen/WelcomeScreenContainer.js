@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import MenuButtonsContainer from "./MenuButtonsContainer";
 import ButtonComponent, { buttonLayoutStyles } from "./ButtonComponent";
 import scrollButtons from "../../styles/scrollButtons";
 import {
@@ -14,9 +13,33 @@ import {
   getLogoSize,
   getButtonStripStyles,
   getMobileGridStyles,
+  getTabletPortraitGridStyles,
+  getTabletPortraitDisplaySize,
 } from "../../styles/appLayout";
+import {
+  TABLET_BREAKPOINT,
+  GRID_PADDING_TABLET,
+  GRID_PADDING_MOBILE,
+  GAP_TABLET,
+  GAP_MOBILE,
+  SCROLL_STEP_FACTOR,
+  STRIP_WIDTH_OFFSET,
+  SCROLL_EVENT_THROTTLE,
+  TABLET_PORTRAIT_GAP,
+} from "./constants";
 
-const TABLET_BREAKPOINT = 600;
+function OptionButtons({ options, onPress, size, containerStyle }) {
+  return options.map((opt) => (
+    <ButtonComponent
+      key={opt.id}
+      logo={opt.logo}
+      label={opt.label}
+      onPress={() => onPress(opt)}
+      size={size}
+      containerStyle={containerStyle}
+    />
+  ));
+}
 
 export default function WelcomeScreenContainer({ options, onOptionPress }) {
   const { width, height } = useWindowDimensions();
@@ -24,8 +47,8 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
   const isTabletPortrait = isTablet && height >= width;
 
   const cardLayout = getCardLayout(isTablet, width, height);
-  const gridPadding = isTablet ? 24 : 16;
-  const gap = isTablet ? 28 : 20;
+  const gridPadding = isTablet ? GRID_PADDING_TABLET : GRID_PADDING_MOBILE;
+  const gap = isTablet ? GAP_TABLET : GAP_MOBILE;
   const { companyLogoHeight, logoMarginBottom } = getLogoSize(isTablet, width);
   const logoAreaHeight = companyLogoHeight + logoMarginBottom;
   const contentWidth = isTablet ? width : cardLayout.width;
@@ -48,7 +71,7 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
 
   const scrollRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
-  const scrollStep = contentWidth * 0.6;
+  const scrollStep = contentWidth * SCROLL_STEP_FACTOR;
 
   const scrollLeft = () => {
     const next = Math.max(0, scrollOffset - scrollStep);
@@ -63,21 +86,37 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
   };
 
   if (isTabletPortrait) {
+    const displaySize = getTabletPortraitDisplaySize(width);
+    const portraitGrid = getTabletPortraitGridStyles(
+      TABLET_PORTRAIT_GAP,
+      displaySize,
+    );
     return (
-      <MenuButtonsContainer
-        isTabletPortrait
-        options={options}
-        onPress={onOptionPress}
-      />
+      <View
+        style={[
+          buttonLayoutStyles.buttonsGrid,
+          portraitGrid.gridStyle,
+        ]}
+      >
+        <OptionButtons
+          options={options}
+          onPress={onOptionPress}
+          size={portraitGrid.displaySize}
+          containerStyle={portraitGrid.cellStyle}
+        />
+      </View>
     );
   }
 
   if (isTablet) {
     return (
-      <MenuButtonsContainer
-        style={{ width: strip.rowWidth + 65 }}
+      <View
+        style={[
+          buttonLayoutStyles.buttonsGrid,
+          buttonLayoutStyles.buttonsGridScroll,
+          { width: strip.rowWidth + STRIP_WIDTH_OFFSET },
+        ]}
       >
-        <View style={[buttonLayoutStyles.buttonsGrid, buttonLayoutStyles.buttonsGridScroll]}>
           {strip.maxScroll > 0 && scrollOffset > 0 && (
             <TouchableOpacity
               onPress={scrollLeft}
@@ -97,19 +136,15 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
             ]}
             style={buttonLayoutStyles.scrollView}
             onScroll={(e) => setScrollOffset(e.nativeEvent.contentOffset.x)}
-            scrollEventThrottle={16}
+            scrollEventThrottle={SCROLL_EVENT_THROTTLE}
           >
             <View style={strip.rowStyle}>
-              {options.map((opt) => (
-                <ButtonComponent
-                  key={opt.id}
-                  logo={opt.logo}
-                  label={opt.label}
-                  onPress={() => onOptionPress(opt)}
-                  size={strip.displaySize}
-                  containerStyle={strip.cellStyle}
-                />
-              ))}
+              <OptionButtons
+                options={options}
+                onPress={onOptionPress}
+                size={strip.displaySize}
+                containerStyle={strip.cellStyle}
+              />
             </View>
           </ScrollView>
           {strip.maxScroll > 0 && scrollOffset < strip.maxScroll - 1 && (
@@ -121,25 +156,18 @@ export default function WelcomeScreenContainer({ options, onOptionPress }) {
               <Text style={scrollButtons.text}>{">"}</Text>
             </TouchableOpacity>
           )}
-        </View>
-      </MenuButtonsContainer>
+      </View>
     );
   }
 
   return (
-    <MenuButtonsContainer>
-      <View style={[buttonLayoutStyles.buttonsGrid, mobileGrid.gridStyle]}>
-        {options.map((opt) => (
-          <ButtonComponent
-            key={opt.id}
-            logo={opt.logo}
-            label={opt.label}
-            onPress={() => onOptionPress(opt)}
-            size={mobileGrid.displaySize}
-            containerStyle={mobileGrid.cellStyle}
-          />
-        ))}
-      </View>
-    </MenuButtonsContainer>
+    <View style={[buttonLayoutStyles.buttonsGrid, mobileGrid.gridStyle]}>
+      <OptionButtons
+        options={options}
+        onPress={onOptionPress}
+        size={mobileGrid.displaySize}
+        containerStyle={mobileGrid.cellStyle}
+      />
+    </View>
   );
 }

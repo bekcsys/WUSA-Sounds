@@ -57,7 +57,7 @@ export default function App() {
   );
 
   return (
-    <SafeAreaView style={layout.safeArea}>
+    <SafeAreaView style={layout.safeArea} edges={["top", "bottom"]}>
       <StatusBar barStyle="dark-content" />
       <View style={layout.displayArea}>
           <C1RootTop

@@ -1,82 +1,81 @@
 import { StyleSheet } from "react-native";
-
-
+import { layoutConstants } from "./globalLayoutTablet";
 
 export default StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "transparent",
-    borderRadius: 20,
-    borderColor: "brown",
+    backgroundColor: layoutConstants.appBackground,
+    borderRadius: 0,
     borderWidth: 0,
   },
- 
+
   displayArea: {
     flex: 1,
     alignItems: "stretch",
     justifyContent: "flex-start",
+    margin: 0,
     padding: 0,
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: "red",
+    backgroundColor: layoutConstants.appBackground,
+    borderWidth: 0,
+    borderRadius: 0,
   },
 
-  rootTop: {
+  displayRoot: {
     flex: 1,
     width: "100%",
-    height: "88%",
+    height: "94%",
     alignSelf: "stretch",
+    margin: 0,
     padding: 0,
     minHeight: 0,
     maxHeight: "100%",
     borderColor: "orange",
     borderRadius: 20,
-    borderWidth: 3,
+    borderWidth: 0,
   },
-  rootTopContentTop: {
+  dispContTop: {
     flex: 0.4,
     minHeight: 0,
     overflow: "hidden",
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 0,
+    justifyContent: "flex-end",
+    paddingBottom: 35,
     borderColor: "grey",
     borderRadius: 30,
-    borderWidth: 3,
+    borderWidth: 0,
   },
-  rootTopContentBottom: {
+  dispContBottom: {
     flex: 0.6,
     minHeight: 0,
     overflow: "hidden",
     width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-end",
+    alignItems: "stretch",
     alignSelf: "stretch",
     paddingTop: 0,
-    paddingBottom: 16,
+    paddingBottom: 30,
     borderColor: "grey",
     borderRadius: 30,
-    borderWidth: 3,
+    borderWidth: 0,
   },
-  rootBottomFooter: {
+  dispContTopWrapper: layoutConstants.dispContTopWrapper,
+  dispFooter: {
     width: "100%",
-    height: "12%",
+    height: "6%",
     maxHeight: "100%",
     flexShrink: 0,
-    borderWidth: 3,
+    borderWidth: 0,
     borderColor: "orange",
     borderRadius: 20,
   },
-  rootBottomFooterContent: {
+  dispFooterCont: {
     flex: 1,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
     borderColor: "grey",
     borderRadius: 30,
-    borderWidth: 3,
+    borderWidth: 0,
   },
-
 });

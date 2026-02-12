@@ -32,7 +32,7 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
   const availableGridHeight = cardHeight - gridPadding * 2 - logoAreaHeight - labelHeight * 2;
   const rowContentHeight = 34;
   const maxButtonSizeFromHeight = Math.floor((availableGridHeight - rowContentHeight) / 0.88);
-  const maxButtonSizeTablet = 115;
+  const maxButtonSizeTablet = 92;
   const minButtonSizeMobile = 68;
   const rawButtonSize = availableGridWidth / columns;
   const buttonSizeRaw = Math.min(
@@ -72,8 +72,8 @@ export function getButtonStripStyles(isTablet, cardWidth, cardHeight, gridPaddin
 }
 
 export function getTabletPortraitDisplaySize(width) {
-  if (width >= TABLET_BREAKPOINT && width < SMALL_TABLET_MAX_WIDTH) return 170;
-  return 210;
+  if (width >= TABLET_BREAKPOINT && width < SMALL_TABLET_MAX_WIDTH) return 140;
+  return 170;
 }
 
 export function getTabletPortraitGridStyles(gap, displaySize) {
@@ -111,6 +111,7 @@ export function getMobileGridStyles(width, height, gridPadding, gap, logoAreaHei
       flexWrap: "wrap",
       width: gridWidth,
       justifyContent: "space-between",
+      alignSelf: "center",
     },
   };
 }

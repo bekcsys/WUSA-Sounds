@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { isSmallTablet } from "../../styles/appLayout";
-import { BRAND_COLOR, NAVY_BORDER, textPrimary } from "../../styles/brandColors";
+import { BRAND_COLOR, NAVY_BORDER, textPrimary } from "../brandColors";
 
 const TABLET_BREAKPOINT = 600;
 

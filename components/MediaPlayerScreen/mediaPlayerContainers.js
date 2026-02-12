@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import mediaPlayerStyles from "./mediaPlayerStyles";
-import { brandBg, brandCard } from "../../styles/brandColors";
+import { brandBg, brandCard } from "../brandColors";
 
 export function getRootStyle(layout, isTablet, isTabletPortrait) {
   return [

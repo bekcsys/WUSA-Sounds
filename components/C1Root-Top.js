@@ -12,11 +12,13 @@ export default function C1RootTop({
   const layout = useLayout();
 
   return (
-    <View style={layout.rootTop}>
-      <View style={layout.rootTopContentTop}>
+    <View style={layout.displayRoot}>
+      <View style={layout.dispContTop}>
         <LogoComponent source={logoSource} width={logoWidth} height={logoHeight} />
       </View>
-      <View style={layout.rootTopContentBottom}>{children}</View>
+      <View style={layout.dispContBottom}>
+        <View style={layout.dispContTopWrapper}>{children}</View>
+      </View>
     </View>
   );
 }

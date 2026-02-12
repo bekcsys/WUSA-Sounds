@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { navyMuted } from "../../styles/brandColors";
+import { navyMuted } from "../brandColors";
 import mediaPlayerStyles from "./mediaPlayerStyles";
 
 function getVolumeIconName(volume) {

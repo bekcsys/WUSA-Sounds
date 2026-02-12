@@ -6,7 +6,7 @@ import {
   navyAccent,
   brandBg,
   brandCard,
-} from "../../styles/brandColors";
+} from "../brandColors";
 
 export default StyleSheet.create({
   container: {

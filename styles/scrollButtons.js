@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { scrollButtonBg, scrollButtonText } from "./brandColors";
+import { scrollButtonBg, scrollButtonText } from "../components/brandColors";
 
 export default StyleSheet.create({
   left: {

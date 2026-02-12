@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { navyPrimary } from "../../styles/brandColors";
+import { navyPrimary } from "../brandColors";
 import mediaPlayerStyles from "./mediaPlayerStyles";
 
 export default function HomeButtonContent({ onPress, homeLabelFontSize }) {
