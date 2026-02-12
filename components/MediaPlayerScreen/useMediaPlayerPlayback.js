@@ -80,6 +80,12 @@ export function useMediaPlayerPlayback(tracks = []) {
 
   useEffect(() => {
     isMountedRef.current = true;
+    Audio.setAudioModeAsync({
+      playsInSilentModeIOS: true,
+      staysActiveInBackground: true,
+      shouldDuck: false,
+      playThroughEarpieceAndroid: false,
+    }).catch(() => {});
     return () => {
       isMountedRef.current = false;
       unloadSound();
