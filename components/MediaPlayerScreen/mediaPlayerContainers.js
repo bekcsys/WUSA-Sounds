@@ -37,8 +37,12 @@ export function getControlsStyle(layout, isTablet) {
       paddingVertical: layout.controlsPaddingVertical,
       paddingHorizontal: layout.controlsPaddingHorizontal,
       marginBottom: 0,
-      borderRadius: layout.controlsBorderRadius,
-      maxWidth: layout.maxContentWidth,
+      borderTopLeftRadius: layout.controlsBorderRadius,
+      borderTopRightRadius: layout.controlsBorderRadius,
+      borderBottomLeftRadius: layout.controlsBorderRadius,
+      borderBottomRightRadius: layout.controlsBorderRadius,
+      maxWidth: isTablet ? 620 : layout.maxContentWidth,
+      ...(isTablet && { marginTop: 32 }),
     },
   ];
 }

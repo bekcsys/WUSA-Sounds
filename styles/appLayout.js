@@ -22,7 +22,7 @@ export function getLogoSize(isTablet, width = 0, compact = false) {
   const widthVal = small ? 330 : isTablet ? 450 : 275;
   const marginBottom = small ? 20 : isTablet ? 32 : 12;
   if (compact) {
-    const scale = 0.4;
+    const scale = isTablet ? 0.4 : 0.55;
     return {
       companyLogoHeight: Math.round(height * scale),
       companyLogoWidth: Math.round(widthVal * scale),
@@ -173,6 +173,6 @@ export function getMediaPlayerLayout(isTablet, width, height) {
     backButtonTop: isTablet ? 16 : 8,
     backButtonLeft: isTablet ? 24 : 16,
     volumeIconSize: isTablet ? 24 : 20,
-    maxContentWidth: small ? 440 : isTablet ? 520 : availableWidth,
+    maxContentWidth: small ? 560 : isTablet ? 700 : availableWidth,
   };
 }

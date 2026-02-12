@@ -8,12 +8,10 @@ export default function MediaControlsContent({
   isTablet,
   layout,
   isPlaying,
-  isShuffleOn,
   onPlay,
   onPause,
   onPrev,
   onNext,
-  onShuffle,
   onBack,
 }) {
   return (
@@ -22,12 +20,10 @@ export default function MediaControlsContent({
         isTablet={isTablet}
         layout={layout}
         isPlaying={isPlaying}
-        isShuffleOn={isShuffleOn}
         onPlay={onPlay}
         onPause={onPause}
         onPrev={onPrev}
         onNext={onNext}
-        onShuffle={onShuffle}
         onBack={isTablet ? onBack : undefined}
       />
       {!isTablet && (

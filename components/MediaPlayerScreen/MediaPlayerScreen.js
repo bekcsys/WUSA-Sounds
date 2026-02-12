@@ -56,42 +56,110 @@ export default function MediaPlayerScreen({
     ],
     [layout.trackLabelFontSize, layout.trackLabelMarginBottom],
   );
+  const thumbnailWrapStyle = useMemo(
+    () => [
+      mediaPlayerStyles.solfegThumbnailWrap,
+      isTablet && {
+        width: "100%",
+        maxWidth: layout.maxContentWidth,
+        alignSelf: "center",
+      },
+    ],
+    [isTablet, layout.maxContentWidth],
+  );
+
+  const tabletTitleStyle = useMemo(
+    () => [
+      mediaPlayerStyles.tabletTitleText,
+      { fontSize: layout.titleFontSize },
+    ],
+    [layout.titleFontSize],
+  );
+  const tabletTrackStyle = useMemo(
+    () => [
+      mediaPlayerStyles.tabletTrackText,
+      { fontSize: layout.trackLabelFontSize },
+    ],
+    [layout.trackLabelFontSize],
+  );
+
+  const showTabletTitleRow = isTablet && visualizationImage != null;
 
   return (
     <MediaPlayerRootContainer style={rootStyle}>
-      {visualizationImage != null && (
-        <View style={mediaPlayerStyles.visualizationImageWrap}>
-          <Image
-            source={visualizationImage}
-            style={mediaPlayerStyles.visualizationImage}
-            resizeMode="cover"
+      {showTabletTitleRow ? (
+        <MediaControlsContainer style={controlsStyle}>
+          <View style={[mediaPlayerStyles.tabletTitleRow, isTablet && mediaPlayerStyles.tabletTitleRowCloser]}>
+            <View style={mediaPlayerStyles.tabletTitleBlock}>
+              <Text style={tabletTitleStyle}>{title || "Media Player"}</Text>
+              <Text style={tabletTrackStyle}>
+                {playback.currentTrackTitle ??
+                  `Track ${playback.currentTrackIndex + 1}`}
+              </Text>
+            </View>
+            <View style={mediaPlayerStyles.tabletThumbnailRight}>
+              <Image
+                source={visualizationImage}
+                style={{ width: "100%", height: "100%" }}
+                resizeMode="cover"
+              />
+            </View>
+          </View>
+          <MediaTimeContainer style={mediaTimeStyle}>
+            <MediaTimeContent
+              progress={playback.progress}
+              currentTimeSec={playback.currentTimeSec}
+              durationSec={playback.durationSec}
+              formatTime={playback.formatTime}
+              timeTextFontSize={layout.timeTextFontSize}
+              onSeek={playback.handlers?.onSeek}
+            />
+          </MediaTimeContainer>
+          <MediaControlsContent
+            isTablet={isTablet}
+            layout={layout}
+            isPlaying={playback.isPlaying}
+            onBack={onBack}
+            {...playback.handlers}
           />
-        </View>
+        </MediaControlsContainer>
+      ) : (
+        <>
+          {visualizationImage != null && (
+            <View style={thumbnailWrapStyle}>
+              <Image
+                source={visualizationImage}
+                style={mediaPlayerStyles.solfegThumbnail}
+                resizeMode="cover"
+              />
+            </View>
+          )}
+          <MediaControlsContainer style={controlsStyle}>
+            <Text style={categoryTitleStyle}>{title || "Media Player"}</Text>
+            <Text style={trackNameStyle}>
+              {playback.currentTrackTitle ??
+                `Track ${playback.currentTrackIndex + 1}`}
+            </Text>
+            <MediaTimeContainer style={mediaTimeStyle}>
+              <MediaTimeContent
+                progress={playback.progress}
+                currentTimeSec={playback.currentTimeSec}
+                durationSec={playback.durationSec}
+                formatTime={playback.formatTime}
+                timeTextFontSize={layout.timeTextFontSize}
+                onSeek={playback.handlers?.onSeek}
+              />
+            </MediaTimeContainer>
+            <MediaControlsContent
+              isTablet={isTablet}
+              layout={layout}
+              isPlaying={playback.isPlaying}
+              onBack={onBack}
+              {...playback.handlers}
+            />
+          </MediaControlsContainer>
+        </>
       )}
-      <MediaControlsContainer style={controlsStyle}>
-        <Text style={categoryTitleStyle}>{title || "Media Player"}</Text>
-        <Text style={trackNameStyle}>
-          {playback.currentTrackTitle ?? `Track ${playback.currentTrackIndex + 1}`}
-        </Text>
-        <MediaTimeContainer style={mediaTimeStyle}>
-          <MediaTimeContent
-            progress={playback.progress}
-            currentTimeSec={playback.currentTimeSec}
-            durationSec={playback.durationSec}
-            formatTime={playback.formatTime}
-            timeTextFontSize={layout.timeTextFontSize}
-            onSeek={playback.handlers?.onSeek}
-          />
-        </MediaTimeContainer>
-        <MediaControlsContent
-          isTablet={isTablet}
-          layout={layout}
-          isPlaying={playback.isPlaying}
-          isShuffleOn={playback.isShuffleOn}
-          onBack={onBack}
-          {...playback.handlers}
-        />
-      </MediaControlsContainer>
     </MediaPlayerRootContainer>
   );
 }

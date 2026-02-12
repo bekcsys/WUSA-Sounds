@@ -95,6 +95,7 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 24,
     paddingBottom: 0,
     borderColor: "grey",
     borderRadius: 16,

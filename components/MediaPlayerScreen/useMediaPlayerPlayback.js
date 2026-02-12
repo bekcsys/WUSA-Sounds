@@ -1,15 +1,6 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { Audio } from "expo-av";
 
-function randomTrackIndex(current, total) {
-  if (total <= 1) return 0;
-  let next = Math.floor(Math.random() * total);
-  while (next === current && total > 1) {
-    next = Math.floor(Math.random() * total);
-  }
-  return next;
-}
-
 function formatTime(sec) {
   const m = Math.floor(sec / 60);
   const s = Math.floor(sec % 60);
@@ -25,7 +16,6 @@ const PLACEHOLDER_TRACK_COUNT = 5;
 export function useMediaPlayerPlayback(tracks = []) {
   const trackCount = tracks.length > 0 ? tracks.length : PLACEHOLDER_TRACK_COUNT;
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isShuffleOn, setIsShuffleOn] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [volume, setVolume] = useState(0.7);
   const [progress, setProgress] = useState(0);
@@ -130,20 +120,12 @@ export function useMediaPlayerPlayback(tracks = []) {
   }, [tracks.length]);
 
   const onPrev = useCallback(() => {
-    setCurrentTrackIndex((i) =>
-      isShuffleOn
-        ? randomTrackIndex(i, trackCount)
-        : (i - 1 + trackCount) % trackCount
-    );
-  }, [isShuffleOn, trackCount]);
+    setCurrentTrackIndex((i) => (i - 1 + trackCount) % trackCount);
+  }, [trackCount]);
 
   const onNext = useCallback(() => {
-    setCurrentTrackIndex((i) =>
-      isShuffleOn ? randomTrackIndex(i, trackCount) : (i + 1) % trackCount
-    );
-  }, [isShuffleOn, trackCount]);
-
-  const onShuffle = useCallback(() => setIsShuffleOn((prev) => !prev), []);
+    setCurrentTrackIndex((i) => (i + 1) % trackCount);
+  }, [trackCount]);
 
   const onSeek = useCallback(async (positionSec) => {
     if (tracks.length === 0 || !soundRef.current || durationSec <= 0) return;
@@ -156,8 +138,8 @@ export function useMediaPlayerPlayback(tracks = []) {
   }, [tracks.length, durationSec]);
 
   const handlers = useMemo(
-    () => ({ onPlay, onPause, onPrev, onNext, onShuffle, onSeek }),
-    [onPlay, onPause, onPrev, onNext, onShuffle, onSeek]
+    () => ({ onPlay, onPause, onPrev, onNext, onSeek }),
+    [onPlay, onPause, onPrev, onNext, onSeek]
   );
 
   const currentTrackTitle =
@@ -167,7 +149,6 @@ export function useMediaPlayerPlayback(tracks = []) {
 
   return {
     isPlaying,
-    isShuffleOn,
     currentTrackIndex,
     volume,
     setVolume,

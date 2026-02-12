@@ -34,6 +34,10 @@ export default function MediaTimeContent({
 
   return (
     <>
+      <View style={mediaPlayerStyles.timeRow}>
+        <Text style={timeStyle}>{formatTime(currentTimeSec)}</Text>
+        <Text style={timeStyle}>-{formatTime(remaining)}</Text>
+      </View>
       <View
         ref={trackRef}
         style={mediaPlayerStyles.progressBar}
@@ -51,10 +55,6 @@ export default function MediaTimeContent({
             { width: `${(progress || 0) * 100}%` },
           ]}
         />
-      </View>
-      <View style={mediaPlayerStyles.timeRow}>
-        <Text style={timeStyle}>{formatTime(currentTimeSec)}</Text>
-        <Text style={timeStyle}>-{formatTime(remaining)}</Text>
       </View>
     </>
   );

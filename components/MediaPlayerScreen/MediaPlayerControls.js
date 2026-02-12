@@ -44,12 +44,10 @@ export default function MediaPlayerControls({
   isTablet,
   layout,
   isPlaying,
-  isShuffleOn,
   onPlay,
   onPause,
   onPrev,
   onNext,
-  onShuffle,
   onBack,
 }) {
   const rowStyle = [
@@ -75,12 +73,6 @@ export default function MediaPlayerControls({
         label="Next"
         iconName="skip-next"
         onPress={onNext}
-        layout={layout}
-      />
-      <ControlButton
-        label={isShuffleOn ? "Shuffle on" : "Shuffle"}
-        iconName={isShuffleOn ? "shuffle" : "format-list-numbered"}
-        onPress={onShuffle}
         layout={layout}
       />
       {isTablet && onBack != null && (
