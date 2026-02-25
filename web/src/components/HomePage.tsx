@@ -40,13 +40,13 @@ function useMenuLayout(viewport: ViewportSize, viewportHeight: number) {
     const maxSize = isShortLandscape
       ? 88
       : viewport === "wide"
-        ? 128
+        ? 180
         : viewport === "desktop"
-          ? 120
+          ? 172
           : viewport === "laptop"
-            ? 104
+            ? 152
             : viewport === "tablet"
-              ? 92
+              ? 132
               : 88;
     const columns = 3;
     return { gap, minSize, maxSize, columns, compact: isShortLandscape };
@@ -65,13 +65,13 @@ export function HomePage({
   const isTabletOrLarger = viewport !== "mobile";
   const contentMaxWidth =
     viewport === "wide"
-      ? 800
+      ? 960
       : viewport === "desktop"
-        ? 720
+        ? 860
         : viewport === "laptop"
-          ? 680
+          ? 760
           : viewport === "tablet"
-            ? 560
+            ? 600
             : 360;
 
   return (
@@ -83,16 +83,16 @@ export function HomePage({
         >
           <Logo src={LOGO_WUSA} width={logoW} height={logoH} />
         </header>
-        <main className={`flex-1 min-h-0 overflow-auto w-full flex flex-col items-center justify-center ${layout.compact ? "px-3 py-2" : "px-4 py-4"}`}>
+        <main className={`flex-1 min-h-0 overflow-auto w-full flex flex-col items-center justify-center ${layout.compact ? "px-3 py-2" : "px-4 py-4 tablet:px-6 laptop:px-8"}`}>
           <section
-            className={`w-full rounded-[28px] laptop:rounded-[32px] bg-card border border-navy/10 shadow-card flex flex-col items-center mb-4 ${layout.compact ? "py-2 px-4 tablet:py-2 tablet:px-5" : "py-2 px-6 tablet:py-3 tablet:px-8 laptop:py-4 laptop:px-10"}`}
+            className={`w-full rounded-[28px] laptop:rounded-[32px] bg-card border border-navy/10 shadow-card flex flex-col items-center mb-4 ${layout.compact ? "py-2 px-4 tablet:py-2 tablet:px-5" : "py-2 px-4 tablet:py-3 tablet:px-6 laptop:py-4 laptop:px-8"}`}
             style={{ maxWidth: contentMaxWidth }}
           >
             <h2 className={`text-textPrimary font-bold tracking-tight text-center w-full ${layout.compact ? "text-lg mb-2" : "text-lg tablet:text-xl mb-2 tablet:mb-3"}`}>
               Select playlist
             </h2>
             <div
-              className="flex flex-row flex-nowrap items-start justify-center"
+              className="flex flex-row flex-nowrap items-start justify-center w-full"
               style={{ gap: layout.gap }}
             >
               {WELCOME_OPTIONS.map((opt) => (

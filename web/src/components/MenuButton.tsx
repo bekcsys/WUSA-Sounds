@@ -23,7 +23,7 @@ export function MenuButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex flex-col items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed min-w-0 min-h-touch-target tablet:min-h-0 rounded-2xl border-2 border-transparent bg-card hover:bg-navy/5 active:bg-navy/10 transition-all py-1.5 px-2 tablet:py-2 tablet:px-3 w-full max-w-[180px] tablet:max-w-[220px]"
+      className="flex flex-col items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed min-w-0 min-h-touch-target tablet:min-h-0 rounded-2xl border-2 border-transparent bg-card hover:bg-navy/5 active:bg-navy/10 transition-all py-1.5 px-2 tablet:py-2 tablet:px-3 w-full max-w-[180px] tablet:max-w-[260px]"
       style={{ width: size }}
     >
       <div
@@ -43,7 +43,7 @@ export function MenuButton({
         />
       </div>
       <span
-        className={`font-medium text-textPrimary text-center w-full px-0.5 mt-1.5 tablet:mt-1.5 block leading-tight pb-0.5 break-words line-clamp-2 text-xs tablet:text-sm laptop:text-base desktop:text-lg ${selected ? "border-b-2 border-brand" : ""}`}
+        className={`font-medium text-textPrimary text-center w-full min-w-0 px-0.5 mt-1.5 tablet:mt-1.5 block leading-tight pb-0.5 truncate text-xs tablet:text-sm laptop:text-base desktop:text-lg ${selected ? "border-b-2 border-brand" : ""}`}
       >
         {option.label}
       </span>

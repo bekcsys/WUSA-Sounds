@@ -29,13 +29,12 @@ function ControlButton({
 }) {
   const isPrimary = variant === "primary";
   const isToggleOn = variant === "toggle" && ariaPressed;
+  const isActive = (isPrimary && ariaPressed) || isToggleOn;
   const baseClass =
-    "flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 tablet:flex-none tablet:min-w-touch-target tablet:min-h-touch-target tablet:min-w-[72px] py-1.5 px-2 tablet:py-3 tablet:px-3 rounded-lg transition-colors";
-  const className = isPrimary
-    ? `${baseClass} bg-brand text-white border-2 border-navyBorder shadow-button hover:opacity-90 active:opacity-80`
-    : isToggleOn
-      ? `${baseClass} border-2 border-brand bg-brand/15 text-brand hover:bg-brand/25 active:bg-brand/20`
-      : `${baseClass} border border-navy/20 bg-card hover:bg-navy/5 active:bg-navy/10 text-textPrimary`;
+    "flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 tablet:flex-none tablet:min-w-touch-target tablet:min-h-touch-target tablet:min-w-[72px] py-1.5 px-2 tablet:py-3 tablet:px-3 rounded-lg transition-colors border-0 bg-transparent";
+  const colorClass = isActive
+    ? "text-brand hover:text-brand active:opacity-80"
+    : "text-textPrimary hover:text-brand active:opacity-80";
 
   return (
     <button
@@ -43,9 +42,9 @@ function ControlButton({
       onClick={onClick}
       aria-label={ariaLabel}
       aria-pressed={ariaPressed}
-      className={className}
+      className={`${baseClass} ${colorClass}`}
     >
-      <span className="flex items-center justify-center shrink-0" aria-hidden>
+      <span className="flex items-center justify-center shrink-0 [&>svg]:currentColor" aria-hidden>
         <Icon className="w-6 h-6 tablet:w-7 tablet:h-7" strokeWidth={2.25} />
       </span>
       <span className="hidden tablet:block text-xs font-medium truncate max-w-full">{label}</span>
