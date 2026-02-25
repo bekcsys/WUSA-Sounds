@@ -7,14 +7,12 @@ import type { ViewportSize } from "../config/layout";
 import type { PlaybackState } from "../types";
 
 interface MediaPlayerPageProps {
-  title: string;
   onBack: () => void;
   playback: PlaybackState;
   viewport: ViewportSize;
 }
 
 export function MediaPlayerPage({
-  title,
   onBack,
   playback,
   viewport,
