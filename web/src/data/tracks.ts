@@ -14,15 +14,15 @@ const solfeggioPaths = [
 ];
 
 const triBowlPaths = [
-  { id: "174", title: "174 Hz Tri Bowl", path: "tribowl/174TriBowl.mp3" },
-  { id: "285", title: "285 Hz Tri Bowl", path: "tribowl/285TriBowl.mp3" },
-  { id: "396", title: "396 Hz Tri Bowl", path: "tribowl/396TriBowl.mp3" },
-  { id: "bowl01", title: "Bowl 01", path: "tribowl/Bowl01.mp3" },
-  { id: "bowl02", title: "Bowl 02", path: "tribowl/Bowl02.mp3" },
-  { id: "bowl03", title: "Bowl 03", path: "tribowl/Bowl03.mp3" },
-  { id: "bowl04", title: "Bowl 04", path: "tribowl/Bowl04.mp3" },
-  { id: "bowl05", title: "Bowl 05", path: "tribowl/Bowl05.mp3" },
-  { id: "bowl06", title: "Bowl 06", path: "tribowl/Bowl06.mp3" },
+  { id: "174", title: "174 Hz Tri Bowl", path: "TriBowl/174TriBowl.mp3" },
+  { id: "285", title: "285 Hz Tri Bowl", path: "TriBowl/285TriBowl.mp3" },
+  { id: "396", title: "396 Hz Tri Bowl", path: "TriBowl/396TriBowl.mp3" },
+  { id: "bowl01", title: "Bowl 01", path: "TriBowl/Bowl01.mp3" },
+  { id: "bowl02", title: "Bowl 02", path: "TriBowl/Bowl02.mp3" },
+  { id: "bowl03", title: "Bowl 03", path: "TriBowl/Bowl03.mp3" },
+  { id: "bowl04", title: "Bowl 04", path: "TriBowl/Bowl04.mp3" },
+  { id: "bowl05", title: "Bowl 05", path: "TriBowl/Bowl05.mp3" },
+  { id: "bowl06", title: "Bowl 06", path: "TriBowl/Bowl06.mp3" },
 ];
 
 const ambientPaths = [
