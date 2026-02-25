@@ -23,10 +23,12 @@ export interface PlaybackActions {
   prev: () => void;
   next: () => void;
   seek: (positionSec: number) => void;
+  toggleShuffle: () => void;
 }
 
 export interface PlaybackState {
   isPlaying: boolean;
+  isShuffle: boolean;
   currentTrackIndex: number;
   currentTrackTitle: string | null;
   trackCount: number;

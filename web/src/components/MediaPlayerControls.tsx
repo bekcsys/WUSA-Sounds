@@ -1,9 +1,11 @@
 interface MediaPlayerControlsProps {
   isPlaying: boolean;
+  isShuffle: boolean;
   onPlay: () => void;
   onPause: () => void;
   onPrev: () => void;
   onNext: () => void;
+  onShuffle: () => void;
   onBack?: () => void;
 }
 
@@ -19,22 +21,28 @@ function ControlButton({
   icon: string;
   onClick: () => void;
   ariaLabel: string;
-  variant?: "default" | "primary";
+  variant?: "default" | "primary" | "toggle";
   ariaPressed?: boolean;
 }) {
+  const isPrimary = variant === "primary";
+  const isToggleOn = variant === "toggle" && ariaPressed;
+  const baseClass =
+    "flex flex-col items-center justify-center gap-1 min-w-[72px] py-2 px-3 rounded-lg transition-colors";
+  const className = isPrimary
+    ? `${baseClass} bg-brand text-white border-2 border-navyBorder shadow-button hover:opacity-90 active:opacity-80`
+    : isToggleOn
+      ? `${baseClass} border-2 border-brand bg-brand/15 text-brand hover:bg-brand/25 active:bg-brand/20`
+      : `${baseClass} border border-navy/20 bg-card hover:bg-navy/5 active:bg-navy/10 text-textPrimary`;
+
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={ariaLabel}
       aria-pressed={ariaPressed}
-      className={
-        variant === "primary"
-          ? "flex flex-col items-center justify-center gap-1 min-w-[88px] py-3 px-4 rounded-xl bg-brand text-white border-2 border-navyBorder shadow-button hover:opacity-90 active:opacity-80 transition-opacity"
-          : "flex flex-col items-center justify-center gap-1 min-w-[72px] py-2 px-3 rounded-lg border border-navy/20 bg-card hover:bg-navy/5 active:bg-navy/10 text-textPrimary transition-colors"
-      }
+      className={className}
     >
-      <span className={variant === "primary" ? "text-3xl" : "text-2xl"} aria-hidden>
+      <span className="text-2xl" aria-hidden>
         {icon}
       </span>
       <span className="text-xs font-medium">{label}</span>
@@ -44,16 +52,26 @@ function ControlButton({
 
 export function MediaPlayerControls({
   isPlaying,
+  isShuffle,
   onPlay,
   onPause,
   onPrev,
   onNext,
+  onShuffle,
   onBack,
 }: MediaPlayerControlsProps) {
   const handlePlayPause = () => (isPlaying ? onPause() : onPlay());
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 tablet:gap-4 w-full">
+      <ControlButton
+        label="Shuffle"
+        icon="🔀"
+        onClick={onShuffle}
+        ariaLabel={isShuffle ? "Shuffle on" : "Shuffle off"}
+        variant="toggle"
+        ariaPressed={isShuffle}
+      />
       <ControlButton
         label="Prev"
         icon="⏮"

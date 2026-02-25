@@ -21,6 +21,7 @@ export function useMediaPlayerPlayback(
 ): PlaybackState {
   const trackCount = tracks.length;
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isShuffle, setIsShuffle] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [currentTimeSec, setCurrentTimeSec] = useState(0);
@@ -32,8 +33,10 @@ export function useMediaPlayerPlayback(
   const prevPlaylistIdRef = useRef<string | undefined>(playlistId);
   const currentIndexRef = useRef(currentTrackIndex);
   const advanceAndPlayRef = useRef(false);
+  const isShuffleRef = useRef(isShuffle);
   tracksRef.current = tracks;
   currentIndexRef.current = currentTrackIndex;
+  isShuffleRef.current = isShuffle;
 
   const stopProgressInterval = useCallback(() => {
     if (progressIntervalRef.current) {
@@ -52,14 +55,26 @@ export function useMediaPlayerPlayback(
     setProgress(dur > 0 ? pos / dur : 0);
   }, []);
 
+  const getRandomIndex = useCallback((exclude: number): number => {
+    const list = tracksRef.current;
+    if (list.length === 0) return 0;
+    if (list.length === 1) return 0;
+    let idx = Math.floor(Math.random() * list.length);
+    while (idx === exclude) {
+      idx = Math.floor(Math.random() * list.length);
+    }
+    return idx;
+  }, []);
+
   const advanceToNext = useCallback(() => {
     advanceAndPlayRef.current = true;
     setCurrentTrackIndex((i) => {
       const list = tracksRef.current;
       if (list.length === 0) return i;
+      if (isShuffleRef.current && list.length > 1) return getRandomIndex(i);
       return (i + 1) % list.length;
     });
-  }, []);
+  }, [getRandomIndex]);
 
   const loadTrackAtIndex = useCallback(
     (trackList: Track[], index: number, shouldPlay: boolean) => {
@@ -182,13 +197,23 @@ export function useMediaPlayerPlayback(
 
   const prev = useCallback(() => {
     if (trackCount === 0) return;
-    setCurrentTrackIndex((i) => (i - 1 + trackCount) % trackCount);
-  }, [trackCount]);
+    setCurrentTrackIndex((i) => {
+      if (isShuffleRef.current && trackCount > 1) return getRandomIndex(i);
+      return (i - 1 + trackCount) % trackCount;
+    });
+  }, [trackCount, getRandomIndex]);
 
   const next = useCallback(() => {
     if (trackCount === 0) return;
-    setCurrentTrackIndex((i) => (i + 1) % trackCount);
-  }, [trackCount]);
+    setCurrentTrackIndex((i) => {
+      if (isShuffleRef.current && trackCount > 1) return getRandomIndex(i);
+      return (i + 1) % trackCount;
+    });
+  }, [trackCount, getRandomIndex]);
+
+  const toggleShuffle = useCallback(() => {
+    setIsShuffle((s) => !s);
+  }, []);
 
   const seek = useCallback(
     (positionSec: number) => {
@@ -202,8 +227,8 @@ export function useMediaPlayerPlayback(
   );
 
   const actions = useMemo<PlaybackActions>(
-    () => ({ play, pause, prev, next, seek }),
-    [play, pause, prev, next, seek]
+    () => ({ play, pause, prev, next, seek, toggleShuffle }),
+    [play, pause, prev, next, seek, toggleShuffle]
   );
 
   const currentTrackTitle =
@@ -211,6 +236,7 @@ export function useMediaPlayerPlayback(
 
   return {
     isPlaying,
+    isShuffle,
     currentTrackIndex,
     currentTrackTitle,
     trackCount,

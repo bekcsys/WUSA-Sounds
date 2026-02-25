@@ -23,11 +23,11 @@ export function MenuButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`flex flex-col items-center justify-start flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed min-w-0 rounded-xl transition-all ${selected ? "ring-2 ring-navy ring-offset-2 bg-navy/5" : ""}`}
+      className="flex flex-col items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed min-w-0 rounded-2xl border-2 border-transparent bg-card hover:bg-navy/5 active:bg-navy/10 transition-all py-4 px-3 w-full max-w-[180px]"
       style={{ width: size }}
     >
       <div
-        className={`flex justify-center items-center border-[3px] rounded-[28%] bg-brand shadow-button flex-shrink-0 ${selected ? "border-navy ring-2 ring-navy/30" : "border-navyBorder"}`}
+        className="flex justify-center items-center rounded-[28%] bg-brand shadow-button flex-shrink-0 border-2 border-navyBorder"
         style={{
           width: boxSize,
           height: boxSize,
@@ -42,7 +42,9 @@ export function MenuButton({
           height={logoSize}
         />
       </div>
-      <span className="font-medium text-textPrimary text-center w-full px-1 mt-2 block text-sm tablet:text-base leading-tight">
+      <span
+        className={`font-medium text-textPrimary text-center w-full px-1 mt-3 block text-sm tablet:text-base leading-tight pb-1 ${selected ? "border-b-2 border-brand" : ""}`}
+      >
         {option.label}
       </span>
     </button>

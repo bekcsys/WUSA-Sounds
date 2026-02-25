@@ -61,7 +61,7 @@ export function HomePage({
             className="w-full rounded-[28px] laptop:rounded-[32px] bg-card border border-navy/10 shadow-card flex flex-col items-center py-6 px-6 tablet:px-8 laptop:py-8 laptop:px-10 mb-6"
             style={{ maxWidth: contentMaxWidth }}
           >
-            <h2 className="text-textPrimary font-semibold text-base tablet:text-lg mb-4">
+            <h2 className="text-textPrimary text-xl tablet:text-2xl font-bold tracking-tight mb-6 text-center w-full">
               Select playlist
             </h2>
             <div

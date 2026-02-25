@@ -58,7 +58,7 @@ export const triBowlTracks = toTracks(triBowlPaths);
 export const ambientSoundsTracks = toTracks(ambientPaths);
 
 export const WELCOME_OPTIONS = [
-  { id: "solfeggio", label: "Solfeggio Sounds", logo: LOGO_SOUND, tracks: solfeggioTracks },
-  { id: "tribowl", label: "TriBowl Sounds", logo: LOGO_SOUND, tracks: triBowlTracks },
-  { id: "ambient", label: "Ambient Sounds", logo: LOGO_SOUND, tracks: ambientSoundsTracks },
+  { id: "solfeggio", label: "Solfeggio", logo: LOGO_SOUND, tracks: solfeggioTracks },
+  { id: "tribowl", label: "TriBowl", logo: LOGO_SOUND, tracks: triBowlTracks },
+  { id: "ambient", label: "Ambient", logo: LOGO_SOUND, tracks: ambientSoundsTracks },
 ];
