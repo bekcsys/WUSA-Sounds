@@ -43,7 +43,7 @@ export function MenuButton({
         />
       </div>
       <span
-        className={`font-medium text-textPrimary text-center w-full px-0.5 mt-2 tablet:mt-3 block text-xs tablet:text-base leading-tight pb-1 truncate ${selected ? "border-b-2 border-brand" : ""}`}
+        className={`font-medium text-textPrimary text-center w-full px-0.5 mt-2 tablet:mt-3 block leading-tight pb-1 truncate text-xs tablet:text-sm laptop:text-base desktop:text-lg ${selected ? "border-b-2 border-brand" : ""}`}
       >
         {option.label}
       </span>
