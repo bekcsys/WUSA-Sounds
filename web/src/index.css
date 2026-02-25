@@ -8,6 +8,16 @@ html {
   min-height: 100dvh;
   min-height: 100vh;
   background-color: #f0f0f0;
+  -webkit-tap-highlight-color: rgba(30, 58, 95, 0.12);
+}
+
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  [role="progressbar"],
+  a {
+    touch-action: manipulation;
+  }
 }
 body {
   margin: 0;

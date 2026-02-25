@@ -27,22 +27,26 @@ function useMenuLayout(viewport: ViewportSize, viewportHeight: number) {
       viewportHeight < COMPACT_VIEWPORT_HEIGHT;
     const gap = isShortLandscape
       ? 12
-      : viewport === "wide" || viewport === "desktop"
-        ? 32
-        : viewport === "laptop" || viewport === "tablet"
-          ? 24
-          : 12;
+      : viewport === "wide"
+        ? 48
+        : viewport === "desktop"
+          ? 44
+          : viewport === "laptop"
+            ? 40
+            : viewport === "tablet"
+              ? 36
+              : 12;
     const minSize = isTabletOrLarger ? 100 : 88;
     const maxSize = isShortLandscape
       ? 88
       : viewport === "wide"
-        ? 160
+        ? 128
         : viewport === "desktop"
-          ? 140
+          ? 120
           : viewport === "laptop"
-            ? 112
+            ? 104
             : viewport === "tablet"
-              ? 104
+              ? 92
               : 88;
     const columns = 3;
     return { gap, minSize, maxSize, columns, compact: isShortLandscape };
@@ -61,28 +65,30 @@ export function HomePage({
   const isTabletOrLarger = viewport !== "mobile";
   const contentMaxWidth =
     viewport === "wide"
-      ? 720
-      : viewport === "desktop" || viewport === "laptop"
-        ? 640
-        : viewport === "tablet"
-          ? 560
-          : 360;
+      ? 800
+      : viewport === "desktop"
+        ? 720
+        : viewport === "laptop"
+          ? 680
+          : viewport === "tablet"
+            ? 560
+            : 360;
 
   return (
     <div className="min-h-full flex flex-col bg-app">
       <div className="flex-1 flex flex-col min-h-0 flex-grow">
         <header
-          className={`flex-shrink-0 w-full flex items-center justify-center ${layout.compact ? "py-3 tablet:py-4" : "py-6 tablet:py-8 laptop:py-10"}`}
-          style={{ minHeight: layout.compact ? "clamp(60px, 12vh, 100px)" : "clamp(100px, 18vh, 180px)" }}
+          className={`flex-shrink-0 w-full flex items-center justify-center ${layout.compact ? "py-2 tablet:py-3" : "py-4 tablet:py-5 laptop:py-6"}`}
+          style={{ minHeight: layout.compact ? "clamp(52px, 10vh, 88px)" : "clamp(64px, 10vh, 120px)" }}
         >
           <Logo src={LOGO_WUSA} width={logoW} height={logoH} />
         </header>
-        <main className={`flex-1 min-h-0 overflow-auto w-full flex flex-col items-center ${layout.compact ? "px-3 py-2" : "px-4 py-4"}`}>
+        <main className={`flex-1 min-h-0 overflow-auto w-full flex flex-col items-center justify-center ${layout.compact ? "px-3 py-2" : "px-4 py-4"}`}>
           <section
-            className={`w-full rounded-[28px] laptop:rounded-[32px] bg-card border border-navy/10 shadow-card flex flex-col items-center mb-6 ${layout.compact ? "py-3 px-4 tablet:py-3 tablet:px-5" : "py-4 px-6 tablet:py-5 tablet:px-8 laptop:py-6 laptop:px-10 desktop:py-8 desktop:px-10"}`}
+            className={`w-full rounded-[28px] laptop:rounded-[32px] bg-card border border-navy/10 shadow-card flex flex-col items-center mb-4 ${layout.compact ? "py-2 px-4 tablet:py-2 tablet:px-5" : "py-2 px-6 tablet:py-3 tablet:px-8 laptop:py-4 laptop:px-10"}`}
             style={{ maxWidth: contentMaxWidth }}
           >
-            <h2 className={`text-textPrimary font-bold tracking-tight text-center w-full ${layout.compact ? "text-lg mb-3" : "text-xl tablet:text-2xl mb-4 tablet:mb-6"}`}>
+            <h2 className={`text-textPrimary font-bold tracking-tight text-center w-full ${layout.compact ? "text-lg mb-2" : "text-lg tablet:text-xl mb-2 tablet:mb-3"}`}>
               Select playlist
             </h2>
             <div
@@ -99,12 +105,14 @@ export function HomePage({
                 />
               ))}
             </div>
+            <div className="border-t border-navy/10 w-full mt-4 shrink-0" />
+            <div className="w-full pt-4">
+              <MediaPlayerScreen
+                playback={playback}
+                embedded
+              />
+            </div>
           </section>
-          <MediaPlayerScreen
-            playlistTitle={currentOption.label}
-            playback={playback}
-            contentMaxWidth={contentMaxWidth}
-          />
         </main>
       </div>
       <Footer isTablet={isTabletOrLarger} />

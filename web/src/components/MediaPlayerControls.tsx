@@ -1,3 +1,6 @@
+import type { LucideIcon } from "lucide-react";
+import { Shuffle, SkipBack, Play, Pause, SkipForward, Home } from "lucide-react";
+
 interface MediaPlayerControlsProps {
   isPlaying: boolean;
   isShuffle: boolean;
@@ -11,14 +14,14 @@ interface MediaPlayerControlsProps {
 
 function ControlButton({
   label,
-  icon,
+  icon: Icon,
   onClick,
   ariaLabel,
   variant = "default",
   ariaPressed,
 }: {
   label: string;
-  icon: string;
+  icon: LucideIcon;
   onClick: () => void;
   ariaLabel: string;
   variant?: "default" | "primary" | "toggle";
@@ -27,7 +30,7 @@ function ControlButton({
   const isPrimary = variant === "primary";
   const isToggleOn = variant === "toggle" && ariaPressed;
   const baseClass =
-    "flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 tablet:flex-none tablet:min-w-[72px] py-1.5 px-2 tablet:py-2 tablet:px-3 rounded-lg transition-colors";
+    "flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 tablet:flex-none tablet:min-w-touch-target tablet:min-h-touch-target tablet:min-w-[72px] py-1.5 px-2 tablet:py-3 tablet:px-3 rounded-lg transition-colors";
   const className = isPrimary
     ? `${baseClass} bg-brand text-white border-2 border-navyBorder shadow-button hover:opacity-90 active:opacity-80`
     : isToggleOn
@@ -42,8 +45,8 @@ function ControlButton({
       aria-pressed={ariaPressed}
       className={className}
     >
-      <span className="text-xl tablet:text-2xl" aria-hidden>
-        {icon}
+      <span className="flex items-center justify-center shrink-0" aria-hidden>
+        <Icon className="w-6 h-6 tablet:w-7 tablet:h-7" strokeWidth={2.25} />
       </span>
       <span className="hidden tablet:block text-xs font-medium truncate max-w-full">{label}</span>
     </button>
@@ -66,7 +69,7 @@ export function MediaPlayerControls({
     <div className="flex flex-nowrap items-center justify-center gap-2 tablet:gap-4 w-full">
       <ControlButton
         label="Shuffle"
-        icon="🔀"
+        icon={Shuffle}
         onClick={onShuffle}
         ariaLabel={isShuffle ? "Shuffle on" : "Shuffle off"}
         variant="toggle"
@@ -74,13 +77,13 @@ export function MediaPlayerControls({
       />
       <ControlButton
         label="Prev"
-        icon="⏮"
+        icon={SkipBack}
         onClick={onPrev}
         ariaLabel="Previous track"
       />
       <ControlButton
         label={isPlaying ? "Pause" : "Play"}
-        icon={isPlaying ? "⏸" : "▶"}
+        icon={isPlaying ? Pause : Play}
         onClick={handlePlayPause}
         ariaLabel={isPlaying ? "Pause" : "Play"}
         variant="primary"
@@ -88,14 +91,14 @@ export function MediaPlayerControls({
       />
       <ControlButton
         label="Next"
-        icon="⏭"
+        icon={SkipForward}
         onClick={onNext}
         ariaLabel="Next track"
       />
       {onBack && (
         <ControlButton
           label="Back"
-          icon="⌂"
+          icon={Home}
           onClick={onBack}
           ariaLabel="Back to menu"
         />

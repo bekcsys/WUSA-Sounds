@@ -3,6 +3,9 @@ export const LAPTOP_BREAKPOINT = 1024;
 export const DESKTOP_BREAKPOINT = 1280;
 export const WIDE_BREAKPOINT = 1536;
 
+/** Minimum touch target size (px) for 10-point multi-touch tablets (e.g. Surface Go 2). */
+export const MIN_TOUCH_TARGET_PX = 48;
+
 export type ViewportSize = "mobile" | "tablet" | "laptop" | "desktop" | "wide";
 
 export function getViewportSize(width: number): ViewportSize {
