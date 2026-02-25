@@ -1,6 +1,6 @@
 # DoneWizIt Media (Web)
 
-React + Vite + TypeScript + Tailwind web app for the media player. Deploy to Vercel and optionally connect a GoDaddy domain.
+React + Vite + TypeScript + Tailwind web app for the media player. Deploy to Vercel; media (MP3) is loaded from AWS S3 via a single config; logo and menu icons are deployed with the app.
 
 ## Setup
 
@@ -10,18 +10,12 @@ React + Vite + TypeScript + Tailwind web app for the media player. Deploy to Ver
    cd web && npm install
    ```
 
-2. Create `.env` from the example and set your S3 base URL:
+2. **Media (MP3) from S3** – One place to set the S3 base URL:
 
-   ```bash
-   cp .env.example .env
-   ```
+   - **Option A (recommended for Vercel):** In Vercel project **Settings > Environment Variables**, add `VITE_S3_MEDIA_URL` = your S3 base URL (no trailing slash), e.g. `https://your-bucket.s3.us-east-1.amazonaws.com/media` or `https://d1234abcd.cloudfront.net/media`.
+   - **Option B (local / single place in code):** Edit **`src/config/media.ts`** and set `S3_MEDIA_BASE_URL` to your bucket URL. You can also copy `.env.example` to `.env` and set `VITE_S3_MEDIA_URL` there for local runs.
 
-   Set `VITE_S3_MEDIA_URL` to the base URL of your AWS S3 bucket (or CloudFront) where audio files are stored, e.g.:
-
-   - `https://your-bucket.s3.us-east-1.amazonaws.com/media`
-   - or `https://d1234abcd.cloudfront.net/media`
-
-   Do not add a trailing slash. Track paths in `src/data/tracks.ts` are appended to this base (e.g. `solfeggio/174Meditation.mp3`).
+   Track paths in `src/data/tracks.ts` (e.g. `SolfeggioSounds/174Meditation.mp3`) are appended to this base. When you move files in S3, only change `S3_MEDIA_BASE_URL` or `VITE_S3_MEDIA_URL`; no need to change track paths unless you rename files or folders.
 
 3. Run locally:
 
@@ -35,32 +29,30 @@ React + Vite + TypeScript + Tailwind web app for the media player. Deploy to Ver
    npm run build
    ```
 
-## Assets (images and audio)
+## Assets
 
-All static assets live under **`web/public/assets/`** so the company logo and menu work.
-
-**Images** – Copy from the mobile app `assets/images/` into **`web/public/assets/images/`**:
+**Logo and menu icons (deployed with the app)** – Must be in the repo so they appear on Vercel. Add these files under **`web/public/assets/images/`**:
 
 - `L01-WUSA.png` – company logo (header on welcome and player pages)
-- `SoundFreqenciesLogo.png` – Solfeggio / TriBowl / Ambient menu options
+- `SoundFreqenciesLogo.png` – menu option icons (Solfeggio / TriBowl / Ambient)
 
-They are served at `/assets/images/...` and referenced via `src/config/assets.ts`.
+Copy them from your design assets or the mobile app `assets/images/`, then commit. They are served at `/assets/images/...`. In Vercel, set **Root Directory** to `web` so the build and `public/` paths are correct.
 
-**Audio** – Either set `VITE_S3_MEDIA_URL` for S3, or place files under **`web/public/assets/audio/`** using the same paths as in `src/data/tracks.ts` (e.g. `assets/audio/solfeggio/174Meditation.mp3`). If S3 is not set, the app loads from `/assets/audio/`.
+**Audio (MP3)** – Served from AWS S3 only. Do not put MP3s in the repo. Configure the S3 base URL as above; the app builds full URLs from `src/config/media.ts` and `src/data/tracks.ts`.
 
 ## S3 bucket structure
 
-Upload your audio files under paths that match `src/data/tracks.ts`:
+Upload MP3s to your bucket under paths that match `src/data/tracks.ts`, for example:
 
-- `solfeggio/174Meditation.mp3`, `solfeggio/285Healing.mp3`, etc.
+- `SolfeggioSounds/174Meditation.mp3`, `SolfeggioSounds/285Healing.mp3`, etc.
 - `tribowl/174TriBowl.mp3`, `tribowl/Bowl01.mp3`, etc.
-- `ambient/Ambient-Fragments.mp3`, `ambient/Ambient-Calm.mp3`, etc.
+- `AmbinetSounds/Ambient - Calm.mp3`, etc.
 
-Ensure the bucket (or CloudFront) allows public read access for these objects, or use signed URLs if you add backend support.
+Ensure the bucket (or CloudFront) allows public read for these objects.
 
 ## Deploy to Vercel
 
-1. In Vercel, create a new project and link this repo.
-2. Set **Root Directory** to `web` so Vercel builds from the web app.
-3. Add environment variable in Vercel: `VITE_S3_MEDIA_URL` = your S3 base URL.
-4. Deploy. Then in **Settings > Domains** you can add your GoDaddy domain and follow Vercel’s DNS instructions.
+1. Create a project and link this repo. Set **Root Directory** to `web`.
+2. Add env var: `VITE_S3_MEDIA_URL` = your S3 base URL (no trailing slash).
+3. Ensure `web/public/assets/images/L01-WUSA.png` and `SoundFreqenciesLogo.png` are committed so the logo and icons deploy.
+4. Deploy. Add a custom domain under **Settings > Domains** if needed.
