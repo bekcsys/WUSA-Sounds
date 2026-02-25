@@ -24,6 +24,7 @@ export function useMediaPlayerPlayback(tracks = []) {
   const soundRef = useRef(null);
   const isMountedRef = useRef(true);
   const isPlayingRef = useRef(isPlaying);
+  const advanceAndContinueRef = useRef(false);
   isPlayingRef.current = isPlaying;
 
   const unloadSound = useCallback(async () => {
@@ -57,9 +58,9 @@ export function useMediaPlayerPlayback(tracks = []) {
             setCurrentTimeSec(pos);
             setDurationSec(dur);
             setProgress(dur > 0 ? pos / dur : 0);
-            if (status.didJustFinishAndNotLoop) {
+            if (status.didJustFinish) {
+              advanceAndContinueRef.current = true;
               setCurrentTrackIndex((i) => (i + 1) % tracks.length);
-              setIsPlaying(false);
             }
           }
         );
@@ -99,7 +100,9 @@ export function useMediaPlayerPlayback(tracks = []) {
       setCurrentTrackIndex(idx);
       return;
     }
-    loadTrack(idx, isPlayingRef.current);
+    const shouldPlay = isPlayingRef.current || advanceAndContinueRef.current;
+    if (advanceAndContinueRef.current) advanceAndContinueRef.current = false;
+    loadTrack(idx, shouldPlay);
     return () => {
       unloadSound();
     };
