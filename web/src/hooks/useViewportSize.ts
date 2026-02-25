@@ -5,6 +5,8 @@ import {
   type ViewportSize,
 } from "../config/layout";
 
+export const COMPACT_VIEWPORT_HEIGHT = 900;
+
 export function useViewportSize(): ViewportSize {
   const [size, setSize] = useState<ViewportSize>(() =>
     typeof window !== "undefined"
@@ -19,6 +21,20 @@ export function useViewportSize(): ViewportSize {
   }, []);
 
   return size;
+}
+
+export function useViewportHeight(): number {
+  const [height, setHeight] = useState(
+    typeof window !== "undefined" ? window.innerHeight : 1024
+  );
+
+  useEffect(() => {
+    const handler = () => setHeight(window.innerHeight);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  return height;
 }
 
 export function useIsTablet(): boolean {

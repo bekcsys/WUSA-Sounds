@@ -23,7 +23,7 @@ export function MenuButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex flex-col items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed min-w-0 rounded-2xl border-2 border-transparent bg-card hover:bg-navy/5 active:bg-navy/10 transition-all py-4 px-3 w-full max-w-[180px]"
+      className="flex flex-col items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed min-w-0 rounded-2xl border-2 border-transparent bg-card hover:bg-navy/5 active:bg-navy/10 transition-all py-2 px-2 tablet:py-4 tablet:px-3 w-full max-w-[180px]"
       style={{ width: size }}
     >
       <div
@@ -43,7 +43,7 @@ export function MenuButton({
         />
       </div>
       <span
-        className={`font-medium text-textPrimary text-center w-full px-1 mt-3 block text-sm tablet:text-base leading-tight pb-1 ${selected ? "border-b-2 border-brand" : ""}`}
+        className={`font-medium text-textPrimary text-center w-full px-0.5 mt-2 tablet:mt-3 block text-xs tablet:text-base leading-tight pb-1 truncate ${selected ? "border-b-2 border-brand" : ""}`}
       >
         {option.label}
       </span>

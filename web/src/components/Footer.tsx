@@ -1,6 +1,6 @@
 export function Footer({ isTablet }: { isTablet: boolean }) {
   return (
-    <footer className="w-full flex-shrink-0" style={{ height: "6%" }}>
+    <footer className="w-full flex-shrink-0 min-h-[52px]">
       <div className="w-full flex flex-col items-center pt-0.5">
         <div className="w-full h-px bg-divider" />
         <div

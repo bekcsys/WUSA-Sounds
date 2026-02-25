@@ -23,8 +23,8 @@ export function MediaPlayerPage({
   const { width: logoW, height: logoH } = getLogoSize(false, viewport);
 
   return (
-    <div className="min-h-screen flex flex-col bg-app">
-      <div className="flex-1 flex flex-col min-h-0" style={{ height: "94%" }}>
+    <div className="min-h-full flex flex-col bg-app">
+      <div className="flex-1 flex flex-col min-h-0 flex-grow">
         <header
           className="flex-shrink-0 w-full flex items-center justify-center py-6 tablet:py-8 laptop:py-10"
           style={{ minHeight: "clamp(100px, 18vh, 180px)" }}

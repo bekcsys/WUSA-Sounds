@@ -16,11 +16,20 @@ interface WelcomePageProps {
 function useMenuLayout(viewport: ViewportSize) {
   return useMemo(() => {
     const isTabletOrLarger = viewport !== "mobile";
-    const gap = isTabletOrLarger ? 32 : 24;
-    const minSize = isTabletOrLarger ? 120 : 100;
+    const gap =
+      viewport === "wide" || viewport === "desktop" ? 32 : viewport === "laptop" || viewport === "tablet" ? 24 : 12;
+    const minSize = isTabletOrLarger ? 100 : 88;
     const maxSize =
-      viewport === "wide" ? 160 : viewport === "desktop" || viewport === "laptop" ? 140 : isTabletOrLarger ? 130 : 120;
-    const columns = isTabletOrLarger ? 3 : 2;
+      viewport === "wide"
+        ? 160
+        : viewport === "desktop"
+          ? 140
+          : viewport === "laptop"
+            ? 112
+            : viewport === "tablet"
+              ? 104
+              : 88;
+    const columns = 3;
     return { gap, minSize, maxSize, columns };
   }, [viewport]);
 }
@@ -33,8 +42,8 @@ export function WelcomePage({ onSelect, viewport }: WelcomePageProps) {
   const handleClick = (opt: WelcomeOption) => onSelect(opt);
 
   return (
-    <div className="min-h-screen flex flex-col bg-app">
-      <div className="flex-1 flex flex-col min-h-0" style={{ height: "94%" }}>
+    <div className="min-h-full flex flex-col bg-app">
+      <div className="flex-1 flex flex-col min-h-0 flex-grow">
         <header
           className="flex-shrink-0 w-full flex items-center justify-center py-6 tablet:py-8 laptop:py-10"
           style={{ minHeight: "clamp(100px, 18vh, 180px)" }}
@@ -56,20 +65,17 @@ export function WelcomePage({ onSelect, viewport }: WelcomePageProps) {
             }}
           >
             <div
-              className="flex flex-row flex-wrap items-start justify-center"
+              className="flex flex-row flex-nowrap items-start justify-center"
               style={{
                 gap: layout.gap,
-                width:
-                  layout.columns === 2
-                    ? layout.minSize * 2 + layout.gap
-                    : layout.maxSize * 3 + layout.gap * 2,
+                width: layout.maxSize * layout.columns + layout.gap * (layout.columns - 1),
               }}
             >
               {WELCOME_OPTIONS.map((opt) => (
                 <MenuButton
                   key={opt.id}
                   option={opt}
-                  size={layout.columns === 2 ? layout.minSize : layout.maxSize}
+                  size={layout.maxSize}
                   onClick={() => handleClick(opt)}
                 />
               ))}
