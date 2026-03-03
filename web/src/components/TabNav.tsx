@@ -28,7 +28,7 @@ export function TabNav({ activeTab, onSelectTab, className = "" }: TabNavProps) 
           aria-controls={`panel-${id}`}
           id={`tab-${id}`}
           onClick={() => onSelectTab(id)}
-          className={`min-h-touch-target tablet:min-h-[48px] px-4 tablet:px-6 py-2.5 tablet:py-3 text-sm tablet:text-base font-medium border-b-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 ${
+          className={`min-h-touch-target tablet:min-h-[48px] px-4 tablet:px-6 py-2.5 tablet:py-3 text-sm tablet:text-base font-semibold border-b-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 ${
             activeTab === id
               ? "text-brand border-brand"
               : "text-textMuted border-transparent hover:text-textPrimary hover:border-navy/20"
