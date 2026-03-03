@@ -42,12 +42,10 @@ function MediaPlayerContent({
       </div>
       <MediaPlayerControls
         isPlaying={playback.isPlaying}
-        isShuffle={playback.isShuffle}
         onPlay={actions.play}
         onPause={actions.pause}
         onPrev={actions.prev}
         onNext={actions.next}
-        onShuffle={actions.toggleShuffle}
         onBack={onBack}
       />
     </>

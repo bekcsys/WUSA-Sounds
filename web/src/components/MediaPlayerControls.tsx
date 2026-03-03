@@ -1,14 +1,12 @@
 import type { LucideIcon } from "lucide-react";
-import { Shuffle, SkipBack, Play, Pause, SkipForward, Home } from "lucide-react";
+import { SkipBack, Play, Pause, SkipForward, Home } from "lucide-react";
 
 interface MediaPlayerControlsProps {
   isPlaying: boolean;
-  isShuffle: boolean;
   onPlay: () => void;
   onPause: () => void;
   onPrev: () => void;
   onNext: () => void;
-  onShuffle: () => void;
   onBack?: () => void;
 }
 
@@ -30,8 +28,12 @@ function ControlButton({
   const isPrimary = variant === "primary";
   const isToggleOn = variant === "toggle" && ariaPressed;
   const isActive = (isPrimary && ariaPressed) || isToggleOn;
+  const widthClass = isPrimary
+    ? "min-w-[64px] w-[64px] flex-none tablet:min-w-[96px] tablet:max-w-[96px] tablet:w-[96px]"
+    : "tablet:min-w-touch-target tablet:min-w-[88px]";
+  const flexClass = isPrimary ? "flex-none" : "flex-1 tablet:flex-none";
   const baseClass =
-    "flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 tablet:flex-none tablet:min-w-touch-target tablet:min-h-touch-target tablet:min-w-[72px] py-1.5 px-2 tablet:py-3 tablet:px-3 rounded-lg transition-colors border-0 bg-transparent";
+    `flex flex-col items-center justify-center gap-0.5 min-w-0 ${flexClass} tablet:min-h-touch-target ${widthClass} py-2 px-2.5 tablet:py-4 tablet:px-4 rounded-lg transition-colors border-0 bg-transparent`;
   const colorClass = isActive
     ? "text-brand hover:text-brand active:opacity-80"
     : "text-textPrimary hover:text-brand active:opacity-80";
@@ -45,35 +47,25 @@ function ControlButton({
       className={`${baseClass} ${colorClass}`}
     >
       <span className="flex items-center justify-center shrink-0 [&>svg]:currentColor" aria-hidden>
-        <Icon className="w-6 h-6 tablet:w-7 tablet:h-7" strokeWidth={2.25} />
+        <Icon className="w-7 h-7 tablet:w-9 tablet:h-9" strokeWidth={2.25} />
       </span>
-      <span className="hidden tablet:block text-xs font-medium truncate max-w-full">{label}</span>
+      <span className="hidden tablet:block text-sm font-medium truncate max-w-full">{label}</span>
     </button>
   );
 }
 
 export function MediaPlayerControls({
   isPlaying,
-  isShuffle,
   onPlay,
   onPause,
   onPrev,
   onNext,
-  onShuffle,
   onBack,
 }: MediaPlayerControlsProps) {
   const handlePlayPause = () => (isPlaying ? onPause() : onPlay());
 
   return (
-    <div className="flex flex-nowrap items-center justify-center gap-2 tablet:gap-4 w-full">
-      <ControlButton
-        label="Shuffle"
-        icon={Shuffle}
-        onClick={onShuffle}
-        ariaLabel={isShuffle ? "Shuffle on" : "Shuffle off"}
-        variant="toggle"
-        ariaPressed={isShuffle}
-      />
+    <div className="flex flex-nowrap items-center justify-center gap-3 tablet:gap-5 w-full">
       <ControlButton
         label="Prev"
         icon={SkipBack}

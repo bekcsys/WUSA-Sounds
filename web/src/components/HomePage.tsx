@@ -21,35 +21,10 @@ interface HomePageProps {
 
 function useMenuLayout(viewport: ViewportSize, viewportHeight: number) {
   return useMemo(() => {
-    const isTabletOrLarger = viewport !== "mobile";
     const isShortLandscape =
       (viewport === "tablet" || viewport === "laptop") &&
       viewportHeight < COMPACT_VIEWPORT_HEIGHT;
-    const gap = isShortLandscape
-      ? 12
-      : viewport === "wide"
-        ? 48
-        : viewport === "desktop"
-          ? 44
-          : viewport === "laptop"
-            ? 40
-            : viewport === "tablet"
-              ? 36
-              : 12;
-    const minSize = isTabletOrLarger ? 100 : 88;
-    const maxSize = isShortLandscape
-      ? 88
-      : viewport === "wide"
-        ? 180
-        : viewport === "desktop"
-          ? 172
-          : viewport === "laptop"
-            ? 152
-            : viewport === "tablet"
-              ? 132
-              : 88;
-    const columns = 3;
-    return { gap, minSize, maxSize, columns, compact: isShortLandscape };
+    return { compact: isShortLandscape };
   }, [viewport, viewportHeight]);
 }
 
@@ -91,15 +66,12 @@ export function HomePage({
             <h2 className={`text-textPrimary font-bold tracking-tight text-center w-full ${layout.compact ? "text-lg mb-2" : "text-lg tablet:text-xl mb-2 tablet:mb-3"}`}>
               Select playlist
             </h2>
-            <div
-              className="flex flex-row flex-nowrap items-start justify-center w-full"
-              style={{ gap: layout.gap }}
-            >
+            <div className="flex flex-nowrap items-center justify-center gap-3 tablet:gap-5 w-full">
               {WELCOME_OPTIONS.map((opt) => (
                 <MenuButton
                   key={opt.id}
                   option={opt}
-                  size={layout.maxSize}
+                  size={88}
                   onClick={() => onSelectOption(opt)}
                   selected={currentOption.id === opt.id}
                 />
