@@ -41,13 +41,13 @@ export function YouTubeEmbed({
 
   return (
     <div className={`flex w-full flex-col items-center gap-4 ${className}`}>
-      <div className="relative w-full max-w-2xl aspect-video rounded-lg overflow-hidden border-4 border-gray-600 bg-gray-700 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.3),0_4px_14px_rgba(0,0,0,0.15)]">
+      <div className="relative w-full max-w-[640px] aspect-[640/368] rounded-md overflow-hidden border-[12px] border-gray-600 bg-gray-700 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.4),0_6px_20px_rgba(0,0,0,0.25)]">
         <iframe
           key={playlistId}
           id="panel-youtube"
           title="YouTube playlist"
           src={embedUrl}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full min-w-0 min-h-0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         />
