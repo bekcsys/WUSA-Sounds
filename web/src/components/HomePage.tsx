@@ -128,14 +128,14 @@ export function HomePage({
             )}
             {activeTab === "youtube" && (
               <div
-                className={layout.compact ? "py-2 px-4 tablet:py-2 tablet:px-5" : "py-2 px-4 tablet:py-3 tablet:px-6 laptop:py-4 laptop:px-8"}
+                className={layout.compact ? "pt-6 pb-2 px-4 tablet:py-2 tablet:px-5" : "pt-8 pb-4 px-4 tablet:pt-8 tablet:pb-4 tablet:px-6 laptop:px-8"}
               >
                 <YouTubeEmbed />
               </div>
             )}
             {activeTab === "spotify" && (
               <div
-                className={layout.compact ? "py-2 px-4 tablet:py-2 tablet:px-5" : "py-2 px-4 tablet:py-3 tablet:px-6 laptop:py-4 laptop:px-8"}
+                className={layout.compact ? "pt-6 pb-2 px-4 tablet:py-2 tablet:px-5" : "pt-8 pb-4 px-4 tablet:pt-8 tablet:pb-4 tablet:px-6 laptop:px-8"}
               >
                 <SpotifyEmbed />
               </div>
