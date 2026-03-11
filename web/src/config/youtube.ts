@@ -3,6 +3,7 @@ export const YOUTUBE_PLAYLIST_ID =
   "PLgIdf285Q8E3iIS978D8qk11IY4IiqPha";
 
 export const YOUTUBE_PLAYLISTS = [
+  "PLDqTr678aIlcePeL9ydbmGOtyiuC1Qr9R",
   "PLsuCfYXzi5DJXxyK5q-Exn1AJCbpjy-tx",
   "PLsuCfYXzi5DIoSXGoq9PwweXVfFd0KWaz",
   "PLsuCfYXzi5DJtCakUW-BmfuTYB749jfUo",
@@ -12,8 +13,8 @@ export const YOUTUBE_PLAYLISTS = [
   "PLQAuJ2UwHIbEx5PnAo8MpWl-lncpiSCeZ",
   "PLQAuJ2UwHIbFHj8S978un9e35AzGODYUl",
   "PLQAuJ2UwHIbGWvN5WdOU87KMkZamGaJeu",
-  "PLQ_PIlf6OzqJJKRMOS0FZMKZ4GWXf9SaL"
- 
+  "PLQ_PIlf6OzqJJKRMOS0FZMKZ4GWXf9SaL",
+  
 ];
 
 export function getYouTubeEmbedPlaylistUrl(playlistId: string): string {
