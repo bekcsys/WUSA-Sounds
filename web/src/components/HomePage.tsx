@@ -58,6 +58,14 @@ export function HomePage({
     window.location.hash = tab;
   }, []);
 
+  const { actions } = playback;
+
+  useEffect(() => {
+    if (activeTab !== "sounds") {
+      actions.pause();
+    }
+  }, [activeTab, actions]);
+
   useEffect(() => {
     const onHashChange = () => {
       const tab = getTabFromHash();

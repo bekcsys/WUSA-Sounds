@@ -141,7 +141,8 @@ export function useMediaPlayerPlayback(
     if (playlistJustChanged) {
       prevPlaylistIdRef.current = playlistId;
       setCurrentTrackIndex(0);
-      loadTrackAtIndex(tracks, 0, true);
+      setIsPlaying(false);
+      loadTrackAtIndex(tracks, 0, false);
       return;
     }
 
