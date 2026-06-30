@@ -1,5 +1,5 @@
 import { getMediaUrl } from "../config/media";
-import { LOGO_SOUND } from "../config/assets";
+import { LOGO_SOUND, LOGO_TRIBOWL, LOGO_AMBIENT } from "../config/assets";
 
 const solfeggioPaths = [
   { id: "174", title: "174 Hz Meditation", path: "SolfeggioSounds/174Meditation.mp3" },
@@ -58,7 +58,7 @@ export const triBowlTracks = toTracks(triBowlPaths);
 export const ambientSoundsTracks = toTracks(ambientPaths);
 
 export const WELCOME_OPTIONS = [
-  { id: "solfeggio", label: "Solfeggio", logo: LOGO_SOUND, tracks: solfeggioTracks },
-  { id: "tribowl", label: "TriBowl", logo: LOGO_SOUND, tracks: triBowlTracks },
-  { id: "ambient", label: "Ambient", logo: LOGO_SOUND, tracks: ambientSoundsTracks },
+  { id: "solfeggio", label: "Solfeggio", logo: LOGO_SOUND, color: "#ce193c", tracks: solfeggioTracks },
+  { id: "tribowl", label: "TriBowl", logo: LOGO_TRIBOWL, color: "#013349", logoBlend: true, tracks: triBowlTracks },
+  { id: "ambient", label: "Ambient", logo: LOGO_AMBIENT, color: "#793236", logoBlend: true, tracks: ambientSoundsTracks },
 ];

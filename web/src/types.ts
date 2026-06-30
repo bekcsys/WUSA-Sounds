@@ -14,6 +14,8 @@ export interface WelcomeOption {
   id: string;
   label: string;
   logo: string;
+  color: string;
+  logoBlend?: boolean;
   tracks: Track[];
 }
 

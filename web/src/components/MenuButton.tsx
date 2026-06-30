@@ -27,23 +27,31 @@ export function MenuButton({
       style={{ width: size }}
     >
       <div
-        className="flex justify-center items-center rounded-[28%] bg-brand shadow-button flex-shrink-0 border-2 border-navyBorder"
+        className="flex justify-center items-center overflow-hidden rounded-[28%] shadow-button flex-shrink-0 border-2 border-navyBorder"
         style={{
           width: boxSize,
           height: boxSize,
+          backgroundColor: option.color,
         }}
       >
         <img
           src={option.logo}
           alt=""
-          className="object-contain"
-          style={{ width: logoSize, height: logoSize }}
-          width={logoSize}
-          height={logoSize}
+          className={
+            option.logoBlend
+              ? "h-full w-full object-contain p-1 mix-blend-lighten"
+              : "object-contain"
+          }
+          style={
+            option.logoBlend ? undefined : { width: logoSize, height: logoSize }
+          }
+          width={option.logoBlend ? boxSize : logoSize}
+          height={option.logoBlend ? boxSize : logoSize}
         />
       </div>
       <span
-        className={`font-medium text-textPrimary text-center w-full min-w-0 px-0.5 mt-1.5 tablet:mt-1.5 block leading-tight pb-0.5 text-xs tablet:text-sm whitespace-nowrap ${selected ? "border-b-2 border-brand" : ""}`}
+        className={`font-medium text-textPrimary text-center w-full min-w-0 px-0.5 mt-1.5 tablet:mt-1.5 block leading-tight pb-0.5 text-xs tablet:text-sm whitespace-nowrap ${selected ? "border-b-2" : ""}`}
+        style={selected ? { borderColor: option.color } : undefined}
       >
         {option.label}
       </span>
