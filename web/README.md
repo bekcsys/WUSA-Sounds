@@ -53,7 +53,7 @@ They are served at `/assets/images/...` and referenced via `src/config/assets.ts
 Upload your audio files under paths that match `src/data/tracks.ts`:
 
 - `solfeggio/174Meditation.mp3`, `solfeggio/285Healing.mp3`, etc.
-- `tribowl/174TriBowl.mp3`, `tribowl/Bowl01.mp3`, etc.
+- `TriBowl/174TriBowlGrounding.mp3`, `TriBowl/417TriBowlPositivity.mp3`, etc.
 - `ambient/Ambient-Fragments.mp3`, `ambient/Ambient-Calm.mp3`, etc.
 
 Ensure the bucket (or CloudFront) allows public read access for these objects, or use signed URLs if you add backend support.
