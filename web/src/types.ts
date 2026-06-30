@@ -19,6 +19,8 @@ export interface WelcomeOption {
   tracks: Track[];
 }
 
+export type RepeatMode = "none" | "all" | "one";
+
 export interface PlaybackActions {
   play: () => void;
   pause: () => void;
@@ -26,11 +28,13 @@ export interface PlaybackActions {
   next: () => void;
   seek: (positionSec: number) => void;
   toggleShuffle: () => void;
+  toggleRepeat: () => void;
 }
 
 export interface PlaybackState {
   isPlaying: boolean;
   isShuffle: boolean;
+  repeatMode: RepeatMode;
   currentTrackIndex: number;
   currentTrackTitle: string | null;
   trackCount: number;

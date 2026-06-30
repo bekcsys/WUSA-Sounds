@@ -12,9 +12,11 @@ interface MediaPlayerScreenProps {
 function MediaPlayerContent({
   playback,
   onBack,
+  embedded = false,
 }: {
   playback: PlaybackState;
   onBack?: () => void;
+  embedded?: boolean;
 }) {
   const { actions } = playback;
   const trackTitle =
@@ -47,6 +49,9 @@ function MediaPlayerContent({
         onPrev={actions.prev}
         onNext={actions.next}
         onBack={onBack}
+        repeatMode={playback.repeatMode}
+        onToggleRepeat={actions.toggleRepeat}
+        showRepeat={embedded}
       />
     </>
   );
@@ -62,7 +67,7 @@ export function MediaPlayerScreen({
   if (embedded) {
     return (
       <div className="w-full">
-        <MediaPlayerContent playback={playback} onBack={onBack} />
+        <MediaPlayerContent playback={playback} onBack={onBack} embedded />
       </div>
     );
   }

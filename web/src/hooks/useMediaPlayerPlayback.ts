@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
-import type { Track, PlaybackState, PlaybackActions } from "../types";
+import type { Track, PlaybackState, PlaybackActions, RepeatMode } from "../types";
 
 function formatTime(sec: number): string {
   const m = Math.floor(sec / 60);
@@ -8,6 +8,7 @@ function formatTime(sec: number): string {
 }
 
 const PROGRESS_INTERVAL_MS = 250;
+const REPEAT_CYCLE: RepeatMode[] = ["one", "all", "none"];
 
 /**
  * Single reusable playback hook for any playlist.
@@ -22,6 +23,7 @@ export function useMediaPlayerPlayback(
   const trackCount = tracks.length;
   const [isPlaying, setIsPlaying] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
+  const [repeatMode, setRepeatMode] = useState<RepeatMode>("none");
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [currentTimeSec, setCurrentTimeSec] = useState(0);
@@ -34,9 +36,11 @@ export function useMediaPlayerPlayback(
   const currentIndexRef = useRef(currentTrackIndex);
   const advanceAndPlayRef = useRef(false);
   const isShuffleRef = useRef(isShuffle);
+  const repeatModeRef = useRef(repeatMode);
   tracksRef.current = tracks;
   currentIndexRef.current = currentTrackIndex;
   isShuffleRef.current = isShuffle;
+  repeatModeRef.current = repeatMode;
 
   const stopProgressInterval = useCallback(() => {
     if (progressIntervalRef.current) {
@@ -76,6 +80,29 @@ export function useMediaPlayerPlayback(
     });
   }, [getRandomIndex]);
 
+  const handleTrackEnded = useCallback(() => {
+    const mode = repeatModeRef.current;
+    const list = tracksRef.current;
+    const index = currentIndexRef.current;
+    if (list.length === 0) return;
+
+    if (mode === "one") {
+      const audio = audioRef.current;
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      }
+      return;
+    }
+
+    if (mode === "none" && index >= list.length - 1) {
+      setIsPlaying(false);
+      return;
+    }
+
+    advanceToNext();
+  }, [advanceToNext]);
+
   const loadTrackAtIndex = useCallback(
     (trackList: Track[], index: number, shouldPlay: boolean) => {
       if (trackList.length === 0 || index < 0 || index >= trackList.length) return;
@@ -88,7 +115,7 @@ export function useMediaPlayerPlayback(
       if (!audioRef.current) {
         const audio = new Audio();
         audio.addEventListener("timeupdate", updateProgress);
-        audio.addEventListener("ended", advanceToNext);
+        audio.addEventListener("ended", handleTrackEnded);
         audioRef.current = audio;
       }
       const audio = audioRef.current;
@@ -131,7 +158,7 @@ export function useMediaPlayerPlayback(
         audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
       }
     },
-    [stopProgressInterval, updateProgress, advanceToNext]
+    [stopProgressInterval, updateProgress, handleTrackEnded]
   );
 
   useEffect(() => {
@@ -226,6 +253,13 @@ export function useMediaPlayerPlayback(
     setIsShuffle((s) => !s);
   }, []);
 
+  const toggleRepeat = useCallback(() => {
+    setRepeatMode((mode) => {
+      const index = REPEAT_CYCLE.indexOf(mode);
+      return REPEAT_CYCLE[(index + 1) % REPEAT_CYCLE.length];
+    });
+  }, []);
+
   const seek = useCallback(
     (positionSec: number) => {
       if (!audioRef.current || durationSec <= 0) return;
@@ -238,8 +272,8 @@ export function useMediaPlayerPlayback(
   );
 
   const actions = useMemo<PlaybackActions>(
-    () => ({ play, pause, prev, next, seek, toggleShuffle }),
-    [play, pause, prev, next, seek, toggleShuffle]
+    () => ({ play, pause, prev, next, seek, toggleShuffle, toggleRepeat }),
+    [play, pause, prev, next, seek, toggleShuffle, toggleRepeat]
   );
 
   const currentTrackTitle =
@@ -248,6 +282,7 @@ export function useMediaPlayerPlayback(
   return {
     isPlaying,
     isShuffle,
+    repeatMode,
     currentTrackIndex,
     currentTrackTitle,
     trackCount,

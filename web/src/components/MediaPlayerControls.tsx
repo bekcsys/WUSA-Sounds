@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
-import { SkipBack, Play, Pause, SkipForward, Home } from "lucide-react";
+import { SkipBack, Play, Pause, SkipForward, Home, Repeat, Repeat1 } from "lucide-react";
+import type { RepeatMode } from "../types";
 
 interface MediaPlayerControlsProps {
   isPlaying: boolean;
@@ -8,7 +9,22 @@ interface MediaPlayerControlsProps {
   onPrev: () => void;
   onNext: () => void;
   onBack?: () => void;
+  repeatMode?: RepeatMode;
+  onToggleRepeat?: () => void;
+  showRepeat?: boolean;
 }
+
+const REPEAT_LABELS: Record<RepeatMode, string> = {
+  none: "Repeat Off",
+  all: "Repeat All",
+  one: "Repeat One",
+};
+
+const REPEAT_ARIA: Record<RepeatMode, string> = {
+  none: "Repeat off",
+  all: "Repeat all",
+  one: "Repeat one",
+};
 
 function ControlButton({
   label,
@@ -17,6 +33,7 @@ function ControlButton({
   ariaLabel,
   variant = "default",
   ariaPressed,
+  reserveLabelSpace,
 }: {
   label: string;
   icon: LucideIcon;
@@ -24,19 +41,37 @@ function ControlButton({
   ariaLabel: string;
   variant?: "default" | "primary" | "toggle";
   ariaPressed?: boolean;
+  reserveLabelSpace?: string[];
 }) {
   const isPrimary = variant === "primary";
-  const isToggleOn = variant === "toggle" && ariaPressed;
+  const isToggle = variant === "toggle";
+  const isToggleOn = isToggle && ariaPressed;
   const isActive = (isPrimary && ariaPressed) || isToggleOn;
   const widthClass = isPrimary
     ? "min-w-[64px] w-[64px] flex-none tablet:min-w-[96px] tablet:max-w-[96px] tablet:w-[96px]"
-    : "tablet:min-w-touch-target tablet:min-w-[88px]";
-  const flexClass = isPrimary ? "flex-none" : "flex-1 tablet:flex-none";
+    : isToggle
+      ? "flex-none tablet:min-w-touch-target"
+      : "tablet:min-w-touch-target tablet:min-w-[88px]";
+  const flexClass = isPrimary || isToggle ? "flex-none" : "flex-1 tablet:flex-none";
   const baseClass =
     `flex flex-col items-center justify-center gap-0.5 min-w-0 ${flexClass} tablet:min-h-touch-target ${widthClass} py-2 px-2.5 tablet:py-4 tablet:px-4 rounded-lg transition-colors border-0 bg-transparent`;
   const colorClass = isActive
     ? "text-brand hover:text-brand active:opacity-80"
     : "text-textPrimary hover:text-brand active:opacity-80";
+
+  const labelEl =
+    reserveLabelSpace && reserveLabelSpace.length > 0 ? (
+      <span className="hidden tablet:grid text-sm font-medium justify-items-center">
+        {reserveLabelSpace.map((text) => (
+          <span key={text} className="col-start-1 row-start-1 invisible" aria-hidden>
+            {text}
+          </span>
+        ))}
+        <span className="col-start-1 row-start-1">{label}</span>
+      </span>
+    ) : (
+      <span className="hidden tablet:block text-sm font-medium truncate max-w-full">{label}</span>
+    );
 
   return (
     <button
@@ -49,7 +84,7 @@ function ControlButton({
       <span className="flex items-center justify-center shrink-0 [&>svg]:currentColor" aria-hidden>
         <Icon className="w-7 h-7 tablet:w-9 tablet:h-9" strokeWidth={2.25} />
       </span>
-      <span className="hidden tablet:block text-sm font-medium truncate max-w-full">{label}</span>
+      {labelEl}
     </button>
   );
 }
@@ -61,8 +96,12 @@ export function MediaPlayerControls({
   onPrev,
   onNext,
   onBack,
+  repeatMode = "none",
+  onToggleRepeat,
+  showRepeat = false,
 }: MediaPlayerControlsProps) {
   const handlePlayPause = () => (isPlaying ? onPause() : onPlay());
+  const RepeatIcon = repeatMode === "one" ? Repeat1 : Repeat;
 
   return (
     <div className="flex flex-nowrap items-center justify-center gap-3 tablet:gap-5 w-full">
@@ -86,6 +125,17 @@ export function MediaPlayerControls({
         onClick={onNext}
         ariaLabel="Next track"
       />
+      {showRepeat && onToggleRepeat && (
+        <ControlButton
+          label={REPEAT_LABELS[repeatMode]}
+          icon={RepeatIcon}
+          onClick={onToggleRepeat}
+          ariaLabel={REPEAT_ARIA[repeatMode]}
+          variant="toggle"
+          ariaPressed={repeatMode !== "none"}
+          reserveLabelSpace={Object.values(REPEAT_LABELS)}
+        />
+      )}
       {onBack && (
         <ControlButton
           label="Back"
