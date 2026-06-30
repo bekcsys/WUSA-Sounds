@@ -14,15 +14,15 @@ const solfeggioPaths = [
 ];
 
 const triBowlPaths = [
-  { id: "174", title: "174 Hz Grounding", path: "TriBowl/174TriBowlGrounding.mp3" },
-  { id: "285", title: "285 Hz Restoration", path: "TriBowl/285TriBowlRestoration.mp3" },
-  { id: "396", title: "396 Hz Release", path: "TriBowl/396TriBowlRelease.mp3" },
-  { id: "417", title: "417 Hz Positivity", path: "TriBowl/417TriBowlPositivity.mp3" },
-  { id: "528", title: "528 Hz Renewal", path: "TriBowl/528TriBowlRenewal.mp3" },
-  { id: "639", title: "639 Hz Harmony", path: "TriBowl/639TriBowlHarmony.mp3" },
-  { id: "741", title: "741 Hz Cleansing", path: "TriBowl/741TriBowlCleansing.mp3" },
-  { id: "852", title: "852 Hz Intuition", path: "TriBowl/852TriBowlIntuition.mp3" },
-  { id: "963", title: "963 Hz Serenity", path: "TriBowl/963TriBowlSerenity.mp3" },
+  { id: "174", title: "174 Hz Grounding", path: "TriBowl/174TriBowl.mp3" },
+  { id: "285", title: "285 Hz Restoration", path: "TriBowl/285TriBowl.mp3" },
+  { id: "396", title: "396 Hz Release", path: "TriBowl/396TriBowl.mp3" },
+  { id: "417", title: "417 Hz Positivity", path: "TriBowl/Bowl01.mp3" },
+  { id: "528", title: "528 Hz Renewal", path: "TriBowl/Bowl02.mp3" },
+  { id: "639", title: "639 Hz Harmony", path: "TriBowl/Bowl03.mp3" },
+  { id: "741", title: "741 Hz Cleansing", path: "TriBowl/Bowl04.mp3" },
+  { id: "852", title: "852 Hz Intuition", path: "TriBowl/Bowl05.mp3" },
+  { id: "963", title: "963 Hz Serenity", path: "TriBowl/Bowl06.mp3" },
 ];
 
 const ambientPaths = [

@@ -177,18 +177,28 @@ export function useMediaPlayerPlayback(
 
   const play = useCallback(() => {
     if (trackCount === 0) return;
-    setIsPlaying(true);
-    if (audioRef.current) {
-      audioRef.current.play().catch(() => setIsPlaying(false));
-    } else {
-      const list = tracksRef.current;
-      const idx = currentIndexRef.current;
-      if (list.length > 0 && idx >= 0 && idx < list.length) {
-        loadTrackAtIndex(list, idx, true);
-      } else {
-        setIsPlaying(false);
-      }
+    const list = tracksRef.current;
+    const idx = currentIndexRef.current;
+    const track = list[idx];
+    if (!track?.source?.trim()) {
+      setIsPlaying(false);
+      return;
     }
+
+    const audio = audioRef.current;
+    const needsLoad =
+      !audio ||
+      audio.error != null ||
+      audio.src !== track.source ||
+      audio.readyState < HTMLMediaElement.HAVE_CURRENT_DATA;
+
+    if (needsLoad) {
+      loadTrackAtIndex(list, idx, true);
+      return;
+    }
+
+    setIsPlaying(true);
+    audio.play().catch(() => setIsPlaying(false));
   }, [trackCount, loadTrackAtIndex]);
 
   const pause = useCallback(() => {
