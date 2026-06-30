@@ -1,4 +1,4 @@
-# DoneWizIt Media (Web)
+# Setup
 
 React + Vite + TypeScript + Tailwind web app for the media player. Deploy to Vercel and optionally connect a GoDaddy domain.
 
