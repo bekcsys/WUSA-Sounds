@@ -1,6 +1,6 @@
-# DoneWizIt Media (Website)
+# WUSA Sounds
 
-This repository contains only the **web app** for DoneWizIt media (playlist selector and audio player). Legacy Expo / React Native mobile app code has been removed.
+Relaxing sounds and media syetm for Sauna and Pods.
 
 ## Quick start
 
