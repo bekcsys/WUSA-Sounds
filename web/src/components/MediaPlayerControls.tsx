@@ -46,7 +46,6 @@ function ControlButton({
   const isPrimary = variant === "primary";
   const isToggle = variant === "toggle";
   const isToggleOn = isToggle && ariaPressed;
-  const isActive = (isPrimary && ariaPressed) || isToggleOn;
   const widthClass = isPrimary
     ? "min-w-[64px] w-[64px] flex-none tablet:min-w-[96px] tablet:max-w-[96px] tablet:w-[96px]"
     : isToggle
@@ -55,9 +54,9 @@ function ControlButton({
   const flexClass = isPrimary || isToggle ? "flex-none" : "flex-1 tablet:flex-none";
   const baseClass =
     `flex flex-col items-center justify-center gap-0.5 min-w-0 ${flexClass} tablet:min-h-touch-target ${widthClass} py-2 px-2.5 tablet:py-4 tablet:px-4 rounded-lg transition-colors border-0 bg-transparent`;
-  const colorClass = isActive
-    ? "text-brand hover:text-brand active:opacity-80"
-    : "text-textPrimary hover:text-brand active:opacity-80";
+  const colorClass = isToggleOn
+    ? "text-brand active:opacity-80"
+    : "text-textPrimary active:text-brand active:opacity-80";
 
   const labelEl =
     reserveLabelSpace && reserveLabelSpace.length > 0 ? (
